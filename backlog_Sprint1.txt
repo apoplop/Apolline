@@ -2,26 +2,36 @@ Objectif du Sprint 1 :
 - création du git
 - fichier .txt du backlog
 - exécuter un "Hello, World!" avec un projet Maven
-
-Backlog des fonctionnalités :
-- il est possible de choisir un niveau de difficulté
-
-Héros :
-- le personnage se déplace dans un labyrinthe
-- le personnage ne peut pas traverser les murs
-- le personnage peut attaquer les montres
-- le personnage gagne lorsqu'il trouve le trésor
-- le personnage a une jauge de vie
-- le personnage gagne de la vie avec les potions, et en perd quand il est attaqué par un monstre
-- le personnage perd de la vie dans les pièges
+- créer une première version du jeu
 
 
-Monstres :
-- les monstres se déplacent aléatoirement
-- lorsque le personnage s'approche, le monstre ne se déplace plus aléatoirement et tente d'attaquer le héros
-- les monstres ont une jauge de vie
+#####-------------------#####
+Tâches à réaliser :
+(1) compilation projet Maven
+(2) diagramme de classe
+(3) fonctionnalité du jeu :
+	3.1- le joueur peut contrôler le personnage avec les touches du clavie
+(4) classe labyrinthe : 
+	4.1- le labyrinthe est carré et constitué de murs 
+	4.2- le labyrinthe a des pièges
+(5) classes héros et monstre
+	5.1- le personnage (rond simple) se déplace dans un labyrinthe
+	5.2- le personnage gagne lorsqu'il trouve le trésor
+	5.3- le personnage a une jauge de vie
+	5.4- le personnage perd de la vie quand il est attaqué par un monstre
+	5.5- les monstres se déplacent aléatoirement
+	5.6- le monstre attaque le personnage lorsqu'il rentre à son contact
 
-Labyrinthe :
-- le labyrinthe est carré et constitué de murs
-- le labyrinthe a des pièges
+
+Répartition :
+Idrissa --> 4.1 + 4.2
+
+Donatien --> 3.1 + 5.1
+
+Mostafa --> 5.4 + 5.6
+
+Stanislas --> (2) + 5.3
+
+Apolline --> (1) + 5.5
+
 
