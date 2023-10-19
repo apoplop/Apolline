@@ -12,10 +12,14 @@ Backlog des fonctionnalités :
 
 # Liste de fonctionnalités, associées à leurs priorités :
 --JEU--
+1- le joueur peut contrôler le personnage avec les touches du clavier
+
 2- il est possible de mettre le jeu sur pause
+2- le joueur dispose d'un temps limité pour gagner
 
 4- il est possible de sauvegarder les scores et les utilisateurs
 4- il est possible de choisir un niveau de difficulté
+4- il est possible de gérer la vitesse du joueur
 
 --HEROS--
 1- le personnage se déplace dans un labyrinthe
@@ -24,7 +28,7 @@ Backlog des fonctionnalités :
 1- le personnage a une jauge de vie
 1- le personnage perd de la vie quand il est attaqué par un monstre
 
-2- le personnage peut attaquer les montres
+2- le personnage peut attaquer les montres (grâce à une touche définie)
 
 3- le personnage perd de la vie dans les pièges
 3- le personnage gagne de la vie avec les potions
@@ -32,6 +36,7 @@ Backlog des fonctionnalités :
 
 --MONSTRES--
 1- les monstres se déplacent aléatoirement
+1- le monstre attaque le personnage lorsqu'il rentre à son contact
 
 2- les monstres ont une jauge de vie
 
