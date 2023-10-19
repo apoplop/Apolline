@@ -1,6 +1,27 @@
 Objectif du Sprint 1 :
 - création du git
+- fichier .txt du backlog
 - exécuter un "Hello, World!" avec un projet Maven
 
 Backlog des fonctionnalités :
-- 
+- il est possible de choisir un niveau de difficulté
+
+Héros :
+- le personnage se déplace dans un labyrinthe
+- le personnage ne peut pas traverser les murs
+- le personnage peut attaquer les montres
+- le personnage gagne lorsqu'il trouve le trésor
+- le personnage a une jauge de vie
+- le personnage gagne de la vie avec les potions, et en perd quand il est attaqué par un monstre
+- le personnage perd de la vie dans les pièges
+
+
+Monstres :
+- les monstres se déplacent aléatoirement
+- lorsque le personnage s'approche, le monstre ne se déplace plus aléatoirement et tente d'attaquer le héros
+- les monstres ont une jauge de vie
+
+Labyrinthe :
+- le labyrinthe est carré et constitué de murs
+- le labyrinthe a des pièges
+
