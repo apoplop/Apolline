@@ -1,0 +1,6 @@
+Objectif du Sprint 1 :
+- création du git
+- exécuter un "Hello, World!" avec un projet Maven
+
+Backlog des fonctionnalités :
+- 
