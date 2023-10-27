@@ -3,17 +3,17 @@
   <groupId>teamRandom</groupId>
   <artifactId>labgame</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-</project>
-
-<build>
+  <build>
     <plugins>
         <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
             <configuration>
-                <mainClass>main</mainClass>
+              <source>1.8</source>
+              <target>1.8</target>
             </configuration>
         </plugin>
     </plugins>
 </build>
+</project>
