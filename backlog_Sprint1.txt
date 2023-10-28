@@ -2,25 +2,36 @@ Objectif du Sprint 1 :
 - création du git
 - fichier .txt du backlog
 - exécuter un "Hello, World!" avec un projet Maven
+HC: seulement le dernier item est important
 - créer une première version du jeu
+HC: quel est l'objectif global de cette version? (en quelques mots)
+
 
 
 #####-------------------#####
 Tâches à réaliser :
 (1) compilation projet Maven
+HC: ca existe pas dans le backlog général
 (2) diagramme de classe
+HC: ca existe pas dans le backlog général
 (3) fonctionnalité du jeu :
 	3.1- le joueur peut contrôler le personnage avec les touches du clavie
 (4) classe labyrinthe : 
 	4.1- le labyrinthe est carré et constitué de murs 
+HC: comments sont placés les murs?
 	4.2- le labyrinthe a des pièges
+HC: qui font quoi?
 (5) classes héros et monstre
 	5.1- le personnage (rond simple) se déplace dans un labyrinthe
+HC: même tâche que 3.1
 	5.2- le personnage gagne lorsqu'il trouve le trésor
+HC: qui place le trésor?
 	5.3- le personnage a une jauge de vie
 	5.4- le personnage perd de la vie quand il est attaqué par un monstre
+HC: combien?
 	5.5- les monstres se déplacent aléatoirement
 	5.6- le monstre attaque le personnage lorsqu'il rentre à son contact
+HC: comment?
 
 
 Répartition :
