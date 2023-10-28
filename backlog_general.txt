@@ -14,7 +14,7 @@ Backlog des fonctionnalités :
 --JEU--
 1- le joueur peut contrôler le personnage avec les touches du clavier
 
-2- il est possible de mettre le jeu sur pause
+2 (HC: ou 3-4)- il est possible de mettre le jeu sur pause 
 2- le joueur dispose d'un temps limité pour gagner
 
 4- il est possible de sauvegarder les scores et les utilisateurs
@@ -31,16 +31,20 @@ Backlog des fonctionnalités :
 2- le personnage peut attaquer les montres (grâce à une touche définie)
 
 3- le personnage perd de la vie dans les pièges
+HC: un seul type de piège?)
 3- le personnage gagne de la vie avec les potions
+HC: un seul type de potion?)
 
 
 --MONSTRES--
 1- les monstres se déplacent aléatoirement
 1- le monstre attaque le personnage lorsqu'il rentre à son contact
+HC: à préciser (ici ou dans le bacllog du sprint correspondant)- il le tue, il lui fait perdre des points,...?
 
-2- les monstres ont une jauge de vie
+2(ou 3)- les monstres ont une jauge de vie
 
 4- lorsque le personnage s'approche, le monstre ne se déplace plus aléatoirement et tente d'attaquer le héros
+HC: même avant qu'il s'approche, à voir
 
 --LABYRINTHE--
 1- le labyrinthe est carré et constitué de murs
