@@ -1,9 +1,12 @@
 # Projet ACL
 Bonjour et bienvenue sur la page du projet de 2ième année ISN en Algorithme et Conception de Logiciel. 
-Groupe composé de : Fouques Apolline, ATCHEKOU GBENONGNIME Stanislas, Edy Donatien, Abdessadek Mostafa, Idrissa Conde
+Groupe composé de : 
+Fouques Apolline, Atchekou Gbenongime Stanislas, Edy Donatien, Abdessadek Mostafa, Idrissa Conde
 Nom d'équipe : Team Random
 
-Sont à votre disposition :
-- ce fichier readme
-- fichier backlog_general.txt qui détaille l'ensemble de fonctionnalités du jeu
-- fichier backlog_Sprint1.txt qui détaille la répartition de tâches dans l'équipe d'ici le Sprint2
+
+Suite d'instruction pour lancer le Jeu :
+1- l'utilisateur doit avoir à la fois Git et Maven installés sur leurs machines pour cloner le dépôt
+2- aller dans le dossier projet-acl/labgame
+3- entrer la ligne de commande suivante : mvn package
+4- si le message affiché comporte "BUILD SUCCESS", alors on peut poursuivre en entrant la ligne de commande suivante : java -jar target/labgame-0.0.1-SNAPSHOT.jar
