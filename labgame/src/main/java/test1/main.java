@@ -1,22 +1,21 @@
 package test1;
-import javax.swing.JFrame;
 
-public class main {
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class main extends Application {
+	 public void start(Stage primaryStage) {
+		 	GamePanel game = new GamePanel();
+			Labyrinthe labyrinthe = new Labyrinthe(game, "src/utils/map02.txt");
+	        primaryStage.setTitle("Labyrinthe Simple");
+	        primaryStage.setScene(game.scene);
+	        primaryStage.setResizable(false);
+	        primaryStage.show();
+	        game.startGameThread();
+	        }
 	 public static void main(String[] args) {
-	         
-		 JFrame window =new JFrame();
-		 window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 window.setResizable(false);
-		 window.setTitle("2D Adventure");
-		 
-		 GamePanel gamePanel = new GamePanel();
-		 window.add(gamePanel);
-		 
-		 window.pack();
-		 
-		 window.setLocationRelativeTo(null);
-		 window.setVisible(true);
-		 
-		gamePanel.startGameThread();
+	        launch(args);
+	        
 	    }
+
 }
