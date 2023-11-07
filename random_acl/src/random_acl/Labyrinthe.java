@@ -15,7 +15,8 @@ public class Labyrinthe {
 	
 	public Labyrinthe(GamePanel panel, String mapName) {
 		this.panel = panel;
-		mapTable = mapLoader(mapName);		
+		mapTable = mapLoader(mapName);
+		drawMap(mapTable);
 	}
 	
 	 public static String[][] mapLoader (String mapName){
@@ -64,10 +65,11 @@ public class Labyrinthe {
 	        	for (int j=0; j<mapTable[i].length;j++) {
 	        		Case c = new Case(mapTable[i][j]);
 	                c.setImagePixel(this.panel.tileSize);
+	                c.setPosi(i, j);
 	                this.panel.grid.add(c.getImageView(), j, i);
 	        	}
 	        }
-		   this.panel.scene = new Scene(this.panel.grid,this.panel.screenWidth,this.panel.screenHeight);
+		   this.panel.getChildren().addAll(this.panel.grid);
 	 }
 
 }

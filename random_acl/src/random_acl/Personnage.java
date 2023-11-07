@@ -8,12 +8,15 @@ public class Personnage {
 	private int posi_x;
 	private int posi_y;
 	private Image image;
-	private ImageView imageView;
+	public ImageView imageView;
 	GamePanel panel;
 	public  int nombreVie;
 	private  int jaugeVie;
 	private int vieActuelle;
 	private int[] listeVie = new int[nombreVie];
+	public enum direction {
+		BAS,HAUT,GAUCHE,DROITE;
+	}
 	
 	public Personnage(GamePanel panel,int posi_x, int posi_y) {
 		for (int i=0; i<nombreVie; i++) {
@@ -57,19 +60,33 @@ public class Personnage {
 	}
 	
 	public void deplacerHaut() {
-		this.posi_y -= panel.originalTileSize;
+		int ny = (int) this.imageView.getY() - this.panel.originalTileSize/10;
+		this.imageView.setY(ny);
+		this.posi_y = (int) this.imageView.getY()/48;
+	
+
 	}
 	
 	public void deplacerBas() {
-		this.posi_y += 1;
+		int ny = (int) this.imageView.getY() + this.panel.originalTileSize/10;
+		this.imageView.setY(ny);
+		this.posi_y = (int) this.imageView.getY()/48;
+	
 	}
 	
 	public void deplacerDroite() {
-		this.posi_x += panel.originalTileSize;
+		int ny = (int) this.imageView.getX() + this.panel.originalTileSize/10;
+		this.imageView.setX(ny);
+		this.posi_x = (int) this.imageView.getX()/48;
+	
+		
 	}
 	
 	public void deplacerGauche() {
-		this.posi_y -= panel.originalTileSize;
+		int ny = (int) this.imageView.getX() - this.panel.originalTileSize/10;
+		this.imageView.setX(ny);
+		this.posi_x = (int) this.imageView.getX()/48;
+		
 	}
 	
 	public void attaquer(Personnage personnage, int degat) {
@@ -81,7 +98,9 @@ public class Personnage {
 		this.imageView = new ImageView(this.image);
 		this.imageView.setFitWidth(this.panel.tileSize);
         this.imageView.setFitHeight(this.panel.tileSize);
-        this.panel.grid.add(imageView, this.posi_x, this.posi_y);
+        imageView.setX(posi_x*this.panel.tileSize);
+        imageView.setY(posi_y*this.panel.tileSize);
+        this.panel.getChildren().addAll(imageView);
 	}
 	
 }

@@ -35,6 +35,10 @@ public class Case {
 	public ImageView getImageView() {
 		return this.imageView;
 	}
+	public void setPosi(int x, int y) {
+		this.imageView.setX(x);
+		this.imageView.setY(y);
+	}
 	public void setImagePixel(int pixel_size) {
 		this.imageView.setFitWidth(pixel_size);
         this.imageView.setFitHeight(pixel_size);
