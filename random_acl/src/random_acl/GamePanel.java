@@ -1,4 +1,4 @@
-package random_acl;
+ package random_acl;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -24,15 +24,24 @@ public class GamePanel extends Pane {
 	Labyrinthe labyrinthe;
 	Monstre monstre1;
 	Monstre monstre2;
-
+	Monstre monstre3;
+	Monstre monstre4;
 	
 	Thread gameThread;
 	public GamePanel() {
 		labyrinthe = new Labyrinthe(this, "src/utils/map02.txt");
-		monstre1 = new Monstre(this,1,1);
+		monstre1 = new Monstre(this,1,6);
 		monstre1.d = direction.DROITE;
-		monstre2 = new Monstre(this,2,0);
-		monstre2.d = direction.BAS;
+		monstre2 = new Monstre(this,15,6);
+		monstre2.d = direction.GAUCHE;
+		monstre3 = new Monstre(this,5,7);
+		monstre3.d = direction.BAS;
+		monstre4 = new Monstre(this,2,0);
+		monstre4.d = direction.BAS;
+		this.labyrinthe.listeMonstre.add(monstre1);
+		this.labyrinthe.listeMonstre.add(monstre2);
+		this.labyrinthe.listeMonstre.add(monstre3);
+		this.labyrinthe.listeMonstre.add(monstre4);
 		this.scene = new Scene(this,this.screenWidth,this.screenHeight);
 	}
 	
@@ -51,9 +60,7 @@ public class GamePanel extends Pane {
 	public void update() {
 		this.monstre1.deplacerMonstre();
 		this.monstre2.deplacerMonstre();
-		if (monstre1.colisionAutreMonstre(monstre2)) {
-			System.out.println("colision");
-			//this.monstre2.d = direction.HAUT;
-		}
+		this.monstre3.deplacerMonstre();
+		this.monstre4.deplacerMonstre();
 		}
 }

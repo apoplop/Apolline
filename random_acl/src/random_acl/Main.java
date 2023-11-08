@@ -9,8 +9,9 @@ public class Main extends Application {
 	        primaryStage.setTitle("Labyrinthe Simple");
 	        primaryStage.setScene(game.scene);
 	        primaryStage.setResizable(false);
-	        primaryStage.show();
 	        game.startGameThread();
+	        primaryStage.show();
+	       
 	       
 	        }
 	 public static void main(String[] args) {

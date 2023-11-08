@@ -3,6 +3,7 @@ package random_acl;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -12,6 +13,7 @@ public class Labyrinthe {
 	
 	GamePanel panel;
 	String mapTable[][];
+	ArrayList<Monstre> listeMonstre = new ArrayList();
 	
 	public Labyrinthe(GamePanel panel, String mapName) {
 		this.panel = panel;

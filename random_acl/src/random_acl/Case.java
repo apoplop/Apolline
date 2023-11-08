@@ -22,6 +22,31 @@ public class Case {
 			this.imageView = new ImageView(this.image);
 			break;
 		}
+		case "2": {
+			this.image = new Image("file:src/images/potion_magique.png");
+			this.imageView = new ImageView(this.image);
+			break;
+		}
+		case "3": {
+			this.image = new Image("file:src/images/potion_vie.png");
+			this.imageView = new ImageView(this.image);
+			break;
+		}
+		case "4": {
+			this.image = new Image("file:src/images/potion_protection.png");
+			this.imageView = new ImageView(this.image);
+			break;
+		}
+		case "5": {
+			this.image = new Image("file:src/images/piege_feu.png");
+			this.imageView = new ImageView(this.image);
+			break;
+		}
+		case "*": {
+			this.image = new Image("file:src/images/tresor.png");
+			this.imageView = new ImageView(this.image);
+			break;
+		}
 		default:{
 			this.image = new Image("file:src/images/grass.png");
 			this.imageView = new ImageView(this.image);
