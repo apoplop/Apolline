@@ -1,4 +1,4 @@
-package random_acl;
+ package random_acl;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -58,7 +58,6 @@ public class GamePanel extends Pane {
         }).start();
 	}
 	public void update() {
-		
 		this.monstre1.deplacerMonstre();
 		this.monstre2.deplacerMonstre();
 		this.monstre3.deplacerMonstre();
