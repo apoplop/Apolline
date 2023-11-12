@@ -5,20 +5,27 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import random_acl.Personnage.direction;
 
 public class Labyrinthe {
 	
 	GamePanel panel;
 	String mapTable[][];
+	public GridPane grid = new GridPane();
 	ArrayList<Monstre> listeMonstre = new ArrayList();
+
 	
 	public Labyrinthe(GamePanel panel, String mapName) {
 		this.panel = panel;
 		mapTable = mapLoader(mapName);
 		drawMap(mapTable);
+		
 	}
 	
 	 public static String[][] mapLoader (String mapName){
@@ -68,10 +75,20 @@ public class Labyrinthe {
 	        		Case c = new Case(mapTable[i][j]);
 	                c.setImagePixel(this.panel.tileSize);
 	                c.setPosi(i, j);
-	                this.panel.grid.add(c.getImageView(), j, i);
+	                this.grid.add(c.getImageView(), j, i);
 	        	}
 	        }
-		   this.panel.getChildren().addAll(this.panel.grid);
+		   this.panel.getChildren().add(this.grid);
 	 }
+	 public void ajoutMonstre(Monstre m) {
+		 this.listeMonstre.add(m);
+	 }
+	 public void supprimerMonstre(Monstre m) {
+		 this.listeMonstre.remove(m);
+		 this.panel.getChildren().remove(m.imageView);
+		 
+		   
+		}
+
 
 }

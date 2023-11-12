@@ -1,5 +1,9 @@
  package random_acl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -17,31 +21,19 @@ public class GamePanel extends Pane {
 	final int screenWidth = tileSize*maxScreenCol;	//768 pixels
 	final int screenHeight = tileSize*maxScreenRow;	//576 pixels
 	
-	public GridPane grid = new GridPane();
 	public Scene scene = null;
 	
 	
 	Labyrinthe labyrinthe;
-	Monstre monstre1;
-	Monstre monstre2;
-	Monstre monstre3;
-	Monstre monstre4;
+	Labyrinthe labyrinthe2;
+	Monstre m;
 	
 	Thread gameThread;
 	public GamePanel() {
 		labyrinthe = new Labyrinthe(this, "src/utils/map02.txt");
-		monstre1 = new Monstre(this,1,6);
-		monstre1.d = direction.DROITE;
-		monstre2 = new Monstre(this,15,6);
-		monstre2.d = direction.GAUCHE;
-		monstre3 = new Monstre(this,5,7);
-		monstre3.d = direction.BAS;
-		monstre4 = new Monstre(this,2,0);
-		monstre4.d = direction.BAS;
-		this.labyrinthe.listeMonstre.add(monstre1);
-		this.labyrinthe.listeMonstre.add(monstre2);
-		this.labyrinthe.listeMonstre.add(monstre3);
-		this.labyrinthe.listeMonstre.add(monstre4);
+		//labyrinthe2 = new Labyrinthe(this, "src/utils/map01.txt");
+		m = new Monstre(this,5,2);
+		this.creerMonstre(labyrinthe);
 		this.scene = new Scene(this,this.screenWidth,this.screenHeight);
 	}
 	
@@ -58,9 +50,53 @@ public class GamePanel extends Pane {
         }).start();
 	}
 	public void update() {
-		this.monstre1.deplacerMonstre();
-		this.monstre2.deplacerMonstre();
-		this.monstre3.deplacerMonstre();
-		this.monstre4.deplacerMonstre();
+	    Platform.runLater(() -> {
+	        ArrayList<Monstre> monstres = new ArrayList();
+	        monstres.addAll(this.labyrinthe.listeMonstre); // Copie manuelle des éléments dans une nouvelle liste
+
+	        for (Monstre m : monstres) {
+	            if (this.getChildren().contains(m.imageView)) {
+	                m.deplacerMonstre();
+	            } else {
+	                this.labyrinthe.supprimerMonstre(m);
+	            }
+	        }
+	    });
+	}
+
+
+
+
+	public void creerMonstre(Labyrinthe l) {
+		for (int i=0; i<l.mapTable.length; i++) {
+			for (int j=0; j<l.mapTable[i].length; j++) {
+				switch(l.mapTable[i][j]) {
+				case "d": {
+					l.mapTable[i][j] ="0";
+					Monstre m = new Monstre(this,j,i);
+					m.d = direction.DROITE;
+					l.listeMonstre.add(m);
+				}break;
+				case "g": {
+					l.mapTable[i][j] ="0";
+					Monstre m = new Monstre(this,j,i);
+					m.d = direction.GAUCHE;
+					l.listeMonstre.add(m);				
+				}break;
+				case "b": {
+					l.mapTable[i][j] ="0";
+					Monstre m = new Monstre(this,j,i);
+					m.d = direction.BAS;
+					l.listeMonstre.add(m);
+				}break;
+				case "h": {
+					l.mapTable[i][j] ="0";
+					Monstre m = new Monstre(this,j,i);
+					m.d = direction.HAUT;
+					l.listeMonstre.add(m);
+				}break;
+				}
+			}
 		}
+	}
 }

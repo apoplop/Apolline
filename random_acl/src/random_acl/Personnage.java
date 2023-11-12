@@ -100,7 +100,7 @@ public class Personnage {
         this.imageView.setFitHeight(this.panel.tileSize);
         imageView.setX(posi_x*this.panel.tileSize);
         imageView.setY(posi_y*this.panel.tileSize);
-        this.panel.getChildren().addAll(imageView);
+        this.panel.getChildren().add(imageView);
 	}
 	
 }
