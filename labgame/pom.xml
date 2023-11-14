@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>teamRandom</groupId>
     <artifactId>labgame</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT-jar-with-dependencies</version>
 
     <properties>
         <!-- Specify the Java version -->
