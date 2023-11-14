@@ -9,4 +9,4 @@ Groupe composé de :
 1. l'utilisateur doit avoir à la fois ***Git*** et ***Maven*** installés sur leurs machines pour cloner le dépôt
 2. aller dans le dossier projet-acl/labgame
 3. entrer la ligne de commande suivante : mvn package
-4. si le message affiché comporte *"BUILD SUCCESS"*, alors on peut poursuivre en entrant la ligne de commande suivante : java -jar target/labgame-0.0.1-SNAPSHOT.jar
+4. si le message affiché comporte *"BUILD SUCCESS"*, alors on peut poursuivre en entrant la ligne de commande suivante : mvn javafx:run
