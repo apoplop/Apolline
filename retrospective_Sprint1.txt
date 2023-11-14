@@ -1,0 +1,31 @@
+Rétrospective du Sprint 1 :
+
+#####-------------------#####
+Tâches réalisées :
+(1) compilation projet Maven
+(2) diagramme de classe
+(3) fonctionnalité du jeu :
+	PAS REALISE 3.1- le joueur peut contrôler le personnage avec les touches du clavie
+(4) classe labyrinthe : 
+	4.1- le labyrinthe est carré et constitué de murs 
+	4.2- le labyrinthe a des pièges
+(5) classes héros et monstre
+	PAS REALISE 5.1- le personnage (rond simple) se déplace dans un labyrinthe
+	PAS REALISE 5.2- le personnage gagne lorsqu'il trouve le trésor
+	PAS REALISE 5.3- le personnage a une jauge de vie
+	PAS REALISE 5.4- le personnage perd de la vie quand il est attaqué par un monstre
+	5.5- les monstres se déplacent aléatoirement
+	PAS REALISE 5.6- le monstre attaque le personnage lorsqu'il rentre à son contact
+
+#####-------------------#####
+Ce qui a bien fonctionné :
+- on a une version exéctuable du jeu
+- réunion de groupe qui aident à la réalisation
+
+Ce qu'il faut améliorer :
+- travailler avec des branches au lieu de n'avoir que la branche main
+- ne commit&push que ce qui fonctionne
+- être plus efficace dans la réalisation des fonctionnalités
+
+
+
