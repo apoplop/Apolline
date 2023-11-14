@@ -1,13 +1,16 @@
-package test1;
+ package test1;
 
-import javafx.application.Application;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
+import test1.Personnage.direction;
 
-public class GamePanel extends GridPane implements Runnable {
+
+public class GamePanel extends Pane {
 	//initialisation des param�tres de l'�cran
 	final int originalTileSize=16;  //taille d'une case (16x16 pixels)
 	final int scale =3; 		//�chelle pour avoir un nombre de pixel adapt� a la r�solution de l'�cran
@@ -18,31 +21,80 @@ public class GamePanel extends GridPane implements Runnable {
 	final int screenWidth = tileSize*maxScreenCol;	//768 pixels
 	final int screenHeight = tileSize*maxScreenRow;	//576 pixels
 	
-	public final int pixel_size = 40;
-	public GridPane grid = new GridPane();
 	public Scene scene = null;
+	
+	
+	Labyrinthe labyrinthe;
+	Labyrinthe labyrinthe2;
 	
 	Thread gameThread;
 	public GamePanel() {
+		labyrinthe = new Labyrinthe(this, "src/res/maps/map02.txt");
+		//labyrinthe2 = new Labyrinthe(this, "src/utils/map01.txt");
+		this.creerMonstre(labyrinthe);
+		this.scene = new Scene(this,this.screenWidth,this.screenHeight);
 	}
 	
 	public void startGameThread() {
-		gameThread = new Thread(this);
-		gameThread.start();
+        new Thread(() -> {
+            while (true) {
+            	update();
+                try {
+                    Thread.sleep(20); // Delay for smoother movement
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+	}
+	public void update() {
+	    Platform.runLater(() -> {
+	        ArrayList<Monstre> monstres = new ArrayList();
+	        monstres.addAll(this.labyrinthe.listeMonstre); // Copie manuelle des éléments dans une nouvelle liste
+
+	        for (Monstre m : monstres) {
+	            if (this.getChildren().contains(m.imageView)) {
+	                m.deplacerMonstre();
+	            } else {
+	                this.labyrinthe.supprimerMonstre(m);
+	            }
+	        }
+	    });
 	}
 
-	@Override
-	public void run() {
-		while (gameThread!=null) {  
-			// le jeu va tourner dans cette loop, �a va permettre 2 choses:
-			// 1- mettre a jour les informations du personnage (ex: la position avec les touches du clavier)
-			update();
-			// 2- mettre a jour l'affichage apr�s chaque changement
-			System.out.println("Le jeu est lanc� et il tourne");		// test d'affichage pour voir comment �a marche
+
+
+
+	public void creerMonstre(Labyrinthe l) {
+		for (int i=0; i<l.mapTable.length; i++) {
+			for (int j=0; j<l.mapTable[i].length; j++) {
+				switch(l.mapTable[i][j]) {
+				case "d": {
+					l.mapTable[i][j] ="0";
+					Monstre m = new Monstre(this,j,i);
+					m.d = direction.DROITE;
+					l.listeMonstre.add(m);
+				}break;
+				case "g": {
+					l.mapTable[i][j] ="0";
+					Monstre m = new Monstre(this,j,i);
+					m.d = direction.GAUCHE;
+					l.listeMonstre.add(m);				
+				}break;
+				case "b": {
+					l.mapTable[i][j] ="0";
+					Monstre m = new Monstre(this,j,i);
+					m.d = direction.BAS;
+					l.listeMonstre.add(m);
+				}break;
+				case "h": {
+					l.mapTable[i][j] ="0";
+					Monstre m = new Monstre(this,j,i);
+					m.d = direction.HAUT;
+					l.listeMonstre.add(m);
+				}break;
+				}
+			}
 		}
 	}
-	
-	public void update() {
-			
-		}
 }

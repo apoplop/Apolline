@@ -1,9 +1,37 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>teamRandom</groupId>
     <artifactId>labgame</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    
+
+    <properties>
+        <!-- Specify the Java version -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <!-- Add JavaFX dependencies -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>17.0.6</version> <!-- Use the version that matches your JavaFX SDK -->
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>17.0.6</version> <!-- Use the version that matches your JavaFX SDK -->
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>17.0.6</version> <!-- Use the version that matches your JavaFX SDK -->
+        </dependency>
+        <!-- Add other dependencies as needed -->
+    </dependencies>
+
     <build>
         <plugins>
             <!-- Plugin pour exécution avec Maven -->
@@ -16,7 +44,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            
+
             <!-- Plugin pour rendre l'application exécutable depuis la ligne de commande -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
