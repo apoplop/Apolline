@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class main extends Application {
 	 public void start(Stage primaryStage) {
 		 	GamePanel game = new GamePanel();
 	        primaryStage.setTitle("Labyrinthe Simple");
