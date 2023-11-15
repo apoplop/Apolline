@@ -1,4 +1,4 @@
-Objectif du Sprint 1 :
+Objectif du Sprint 2 :
 - nouvelle version du jeu
 - réaliser le diagramme de séquence
 - mettre à jour le diagramme de classe
