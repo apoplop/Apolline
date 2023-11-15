@@ -26,6 +26,7 @@ public class GamePanel extends Pane {
 	
 	Labyrinthe labyrinthe;
 	Labyrinthe labyrinthe2;
+	Hero hero;
 	
 	Thread gameThread;
 	public GamePanel() {
@@ -49,9 +50,10 @@ public class GamePanel extends Pane {
 	}
 	public void update() {
 	    Platform.runLater(() -> {
+	    	hero.deplacerHero();
 	        ArrayList<Monstre> monstres = new ArrayList();
 	        monstres.addAll(this.labyrinthe.listeMonstre); // Copie manuelle des éléments dans une nouvelle liste
-
+	        
 	        for (Monstre m : monstres) {
 	            if (this.getChildren().contains(m.imageView)) {
 	                m.deplacerMonstre();
@@ -93,6 +95,11 @@ public class GamePanel extends Pane {
 					m.d = direction.HAUT;
 					l.listeMonstre.add(m);
 				}break;
+				case "s": {
+					l.mapTable[i][j] ="0";
+					hero = new Hero(this,j,i);
+				}break;
+				
 				}
 			}
 		}

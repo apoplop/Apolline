@@ -10,45 +10,25 @@ public class Personnage {
 	private Image image;
 	public ImageView imageView;
 	GamePanel panel;
-	public  int nombreVie;
-	private  int jaugeVie;
-	private int vieActuelle;
-	private int[] listeVie = new int[nombreVie];
+	public int vitesse;
+	public final int vie;
 	public enum direction {
 		BAS,HAUT,GAUCHE,DROITE;
 	}
 	
-	public Personnage(GamePanel panel,int posi_x, int posi_y) {
-		for (int i=0; i<nombreVie; i++) {
-			listeVie[i] = jaugeVie; 
-		}
+	public Personnage(GamePanel panel,int posi_x, int posi_y, int vie) {
+		this.vie = vie;
 		this.posi_x = posi_x;
 		this.posi_y = posi_y;
 		this.panel = panel;
 	}
 	
 	public int getVie() {
-		return vieActuelle;
+		return vie;
 	}
 	
 	public void setVie(int vie) {
-		if (vie > 0) {
-			if (listeVie[vieActuelle-1] + vie >= jaugeVie) {
-				listeVie[vieActuelle-1] = jaugeVie;
-				vieActuelle += vieActuelle%nombreVie;
-				listeVie[vieActuelle-1] = jaugeVie;
-			}else {
-				listeVie[vieActuelle-1] += vie;
-			}
-		}else {
-			if (listeVie[vieActuelle-1] + vie < 0) {
-				listeVie[vieActuelle-1] = 0;
-				vieActuelle -= nombreVie%vieActuelle;
-				listeVie[vieActuelle-1] = jaugeVie;
-			}else {
-				listeVie[vieActuelle-1] += vie;
-			}
-		}
+		
 	}
 	
 	public int getPosi_x() {
@@ -60,7 +40,7 @@ public class Personnage {
 	}
 	
 	public void deplacerHaut() {
-		int ny = (int) this.imageView.getY() - this.panel.originalTileSize/10;
+		int ny = (int) this.imageView.getY() - this.panel.originalTileSize/10 -vitesse;
 		this.imageView.setY(ny);
 		this.posi_y = (int) this.imageView.getY()/48;
 	
@@ -68,14 +48,14 @@ public class Personnage {
 	}
 	
 	public void deplacerBas() {
-		int ny = (int) this.imageView.getY() + this.panel.originalTileSize/10;
+		int ny = (int) this.imageView.getY() + this.panel.originalTileSize/10+vitesse;
 		this.imageView.setY(ny);
 		this.posi_y = (int) this.imageView.getY()/48;
 	
 	}
 	
 	public void deplacerDroite() {
-		int ny = (int) this.imageView.getX() + this.panel.originalTileSize/10;
+		int ny = (int) this.imageView.getX() + this.panel.originalTileSize/10+vitesse;
 		this.imageView.setX(ny);
 		this.posi_x = (int) this.imageView.getX()/48;
 	
@@ -83,7 +63,7 @@ public class Personnage {
 	}
 	
 	public void deplacerGauche() {
-		int ny = (int) this.imageView.getX() - this.panel.originalTileSize/10;
+		int ny = (int) this.imageView.getX() - this.panel.originalTileSize/10-vitesse;
 		this.imageView.setX(ny);
 		this.posi_x = (int) this.imageView.getX()/48;
 		

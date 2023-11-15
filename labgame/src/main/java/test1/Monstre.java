@@ -7,7 +7,8 @@ public class Monstre extends Personnage {
 	
 	
 	public Monstre(GamePanel panel, int posi_x, int posi_y) {
-		super(panel, posi_x, posi_y);
+		super(panel, posi_x, posi_y,3);
+		this.vitesse = 0;
 		this.panel = panel;
 		drawMonstre();
 		
@@ -89,7 +90,7 @@ public class Monstre extends Personnage {
 		
 	}
 	public void drawMonstre() {
-		this.drawPersonnage("file:src/res/images/monstre.png");
+		this.drawPersonnage("file:src/res/images/monstreV2.png");
 	}
 	
 	public boolean colisionAutreMonstre() {

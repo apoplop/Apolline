@@ -4,10 +4,10 @@ public class Hero extends Personnage {
 	GamePanel panel;
 
 	public Hero(GamePanel panel, int posi_x, int posi_y) {
-		super(panel, posi_x, posi_y);
+		super(panel, posi_x, posi_y,10);
 		this.panel = panel;
-		//this.vitesse = 3;
-		this.drawPersonnage("file:src/images/hero.png");
+		this.vitesse = 3;
+		this.drawPersonnage("file:src/res/images/heroV2.png");
 	}
 	
 	public boolean colisionMonstre() {
@@ -35,7 +35,7 @@ public class Hero extends Personnage {
                 case UP:
                 {
                 	if (this.imageView.getY() > 0) {
-                		if (this.panel.labyrinthe.mapTable[this.getPosi_y()][this.getPosi_x()].equals("0")) {
+                		if (this.panel.labyrinthe.mapTable[this.getPosi_y()-1][this.getPosi_x()].equals("0")) {
     						this.deplacerHaut();
     					}
                 	}
