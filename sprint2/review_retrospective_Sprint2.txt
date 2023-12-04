@@ -1,0 +1,26 @@
+Review et Rétrospective du Sprint 2 :
+
+#####-------------------#####
+Tâches réalisées - Sprint Review :
+(1) diagramme de séquence
+(2) diagramme de classe
+(3) implémentation des fonctionnalités du personnage : 	
+	3.1- le personnage gagne lorsqu'il trouve le trésor
+	3.2- le personnage a une jauge de vie (et elle affichée, c'est une barre pleine qui diminue au fur et à mesure)
+	3.3- le personnage perd de la vie quand il est attaqué par un monstre
+	3.4- le personnage perd de la vie lorsqu'il rencontre un piège
+	3.5- le personnage peut attaquer un monstre (le joueur appuie sur une touche différente)
+(4) fonctionnalité du labyrinthe
+	4.1 - le labyrinthe a des pièges qui font perdre de la vie au personnage
+(5) fonctionnalités des monstres
+	5.1- les monstres se déplacent pseudo-aléatoirement (aléatoire sur une même direction)
+	5.2- le monstre perd de la vie lorsqu'il est touché par l'attaque du personnage
+	5.3- le monstre a une jauge de vie (mais on ne voit pas sa jauge)
+
+#####-------------------#####
+Sprint Retrospective
+Ce qui a bien fonctionné :
+- 
+
+Ce qu'il faut améliorer :
+- 
