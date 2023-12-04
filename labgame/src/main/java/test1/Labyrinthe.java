@@ -18,6 +18,8 @@ public class Labyrinthe {
 	String mapTable[][];
 	public GridPane grid = new GridPane();
 	ArrayList<Monstre> listeMonstre = new ArrayList();
+	ArrayList cordonneeCase = new ArrayList();
+	
 
 	
 	public Labyrinthe(GamePanel panel, String mapName) {
@@ -84,10 +86,13 @@ public class Labyrinthe {
 	 }
 	 public void supprimerMonstre(Monstre m) {
 		 this.listeMonstre.remove(m);
-		 this.panel.getChildren().remove(m.imageView);
-		 
-		   
-		}
+		 this.panel.getChildren().remove(m.imageView);  
+	}
+	public void supprimerCase(int x, int y) {
+		 Case c = new Case("0");
+		 c.setImagePixel(this.panel.tileSize);
+		 this.grid.add(c.getImageView(), y, x);
+	}
 
 
 }

@@ -11,7 +11,7 @@ public class Personnage {
 	public ImageView imageView;
 	GamePanel panel;
 	public int vitesse;
-	public final int vie;
+	private int vie;
 	public enum direction {
 		BAS,HAUT,GAUCHE,DROITE;
 	}
@@ -28,6 +28,11 @@ public class Personnage {
 	}
 	
 	public void setVie(int vie) {
+		if (this.vie + vie < 0) {
+			this.vie = 0;
+		}else {
+			this.vie += vie;
+		}
 		
 	}
 	

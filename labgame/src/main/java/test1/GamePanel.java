@@ -5,8 +5,11 @@ import java.util.Iterator;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import test1.Personnage.direction;
 
 
@@ -22,24 +25,45 @@ public class GamePanel extends Pane {
 	final int screenHeight = tileSize*maxScreenRow;	//576 pixels
 	
 	public Scene scene = null;
+	public boolean isPaused = false;
 	
 	
 	Labyrinthe labyrinthe;
 	Labyrinthe labyrinthe2;
 	Hero hero;
+	public Text pauseText;
 	
 	Thread gameThread;
 	public GamePanel() {
+		pauseText = new Text("Bravo vous avez gagné !!");
+        pauseText.setStyle("-fx-font-size: 24; -fx-fill: white;");
+        pauseText.setVisible(false); // Initialement invisible
+        pauseText.setTextAlignment(TextAlignment.CENTER);
 		labyrinthe = new Labyrinthe(this, "src/res/maps/map02.txt");
 		//labyrinthe2 = new Labyrinthe(this, "src/utils/map01.txt");
 		this.creerMonstre(labyrinthe);
 		this.scene = new Scene(this,this.screenWidth,this.screenHeight);
 	}
+	public void updatePauseTextVisibility() {
+        // Affiche ou masque le texte en fonction de l'état de la pause
+        pauseText.setVisible(isPaused);
+        // Centre le texte horizontalement et verticalement
+        pauseText.setLayoutX((screenWidth - pauseText.getBoundsInLocal().getWidth()) / 2);
+        pauseText.setLayoutY((screenHeight - pauseText.getBoundsInLocal().getHeight()) / 2);
+    }
 	
 	public void startGameThread() {
         new Thread(() -> {
             while (true) {
-            	update();
+            	if (!isPaused) {
+            		update();
+            	}
+            	this.scene.setOnKeyPressed(e -> {
+                    if (e.getCode() == KeyCode.P) {
+                        togglePause();
+                        updatePauseTextVisibility();
+                    }
+                });
                 try {
                     Thread.sleep(20); // Delay for smoother movement
                 } catch (InterruptedException e) {
@@ -48,6 +72,9 @@ public class GamePanel extends Pane {
             }
         }).start();
 	}
+	public void togglePause() {
+        isPaused = !isPaused;
+    }
 	public void update() {
 	    Platform.runLater(() -> {
 	    	hero.deplacerHero();

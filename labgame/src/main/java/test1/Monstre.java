@@ -18,7 +18,8 @@ public class Monstre extends Personnage {
 		if (this.panel.getChildren().contains(this.imageView)) {
 			switch (d) {
 			case BAS: {
-				if (this.imageView.getY() < this.panel.screenHeight-this.panel.tileSize && !this.colisionAutreMonstre()) {
+				if (this.imageView.getY() < this.panel.screenHeight-this.panel.tileSize && !this.colisionAutreMonstre()
+						&& !this.colisionHero()) {
 					if (this.panel.labyrinthe.mapTable[this.getPosi_y()+1][this.getPosi_x()].equals("0")) {
 						this.deplacerBas();
 					
@@ -34,7 +35,7 @@ public class Monstre extends Personnage {
 			}
 			break;
 			case HAUT: {
-				if (this.imageView.getY() > 0 && !this.colisionAutreMonstre()) {
+				if (this.imageView.getY() > 0 && !this.colisionAutreMonstre() && !this.colisionHero()) {
 					if (this.panel.labyrinthe.mapTable[this.getPosi_y()][this.getPosi_x()].equals("0")) {
 						this.deplacerHaut();
 					
@@ -50,7 +51,7 @@ public class Monstre extends Personnage {
 			}
 			break;
 			case GAUCHE: {
-				if (this.imageView.getX() > 0 && !this.colisionAutreMonstre()) {
+				if (this.imageView.getX() > 0 && !this.colisionAutreMonstre() && !this.colisionHero()) {
 					if (this.panel.labyrinthe.mapTable[this.getPosi_y()][this.getPosi_x()].equals("0")) {
 						this.deplacerGauche();
 					
@@ -66,7 +67,8 @@ public class Monstre extends Personnage {
 			}
 			break;
 			case DROITE: {
-				if (this.imageView.getX() < this.panel.screenWidth-this.panel.tileSize && !this.colisionAutreMonstre()) {
+				if (this.imageView.getX() < this.panel.screenWidth-this.panel.tileSize && !this.colisionAutreMonstre()
+						&& !this.colisionHero()) {
 					if (this.panel.labyrinthe.mapTable[this.getPosi_y()][this.getPosi_x()+1].equals("0")) {
 						this.deplacerDroite();
 					}else {
@@ -93,6 +95,23 @@ public class Monstre extends Personnage {
 		this.drawPersonnage("file:src/res/images/monstreV2.png");
 	}
 	
+	public boolean colisionHero() {
+		double a = this.imageView.getX();
+		double b = this.imageView.getY();
+		double x = this.panel.hero.imageView.getX();
+		double y = this.panel.hero.imageView.getY();
+		double dist = Math.sqrt((a-x)*(a-x)+(b-y)*(b-y));
+		
+		if (dist<=this.panel.tileSize) {
+			System.out.print("colision");
+			System.out.println(" "+dist);
+			return true;
+	}
+		return false;
+	}
+	
+	
+	
 	public boolean colisionAutreMonstre() {
 		double a = this.imageView.getX();
 		double b = this.imageView.getY();
@@ -105,7 +124,7 @@ public class Monstre extends Personnage {
 				if (dist<=this.panel.tileSize) {
 					System.out.print("colision");
 					System.out.println(" "+dist);
-					this.panel.labyrinthe.supprimerMonstre(m);
+			
 					return true;
 			}
 		}
