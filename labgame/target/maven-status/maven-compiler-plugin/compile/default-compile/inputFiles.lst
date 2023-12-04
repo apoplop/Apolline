@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\idris\projet-acl\labgame\src\main\java\test1\main.java
 C:\Users\idris\projet-acl\labgame\src\main\java\test1\Hero.java
 C:\Users\idris\projet-acl\labgame\src\main\java\test1\Monstre.java
@@ -6,3 +7,13 @@ C:\Users\idris\projet-acl\labgame\src\main\java\test1\Personnage.java
 C:\Users\idris\projet-acl\labgame\src\main\java\test1\GamePanel.java
 C:\Users\idris\projet-acl\labgame\src\main\java\module-info.java
 C:\Users\idris\projet-acl\labgame\src\main\java\test1\Case.java
+=======
+C:\Users\loKaa\projetACL\projet-acl\labgame\src\main\java\test1\Monstre.java
+C:\Users\loKaa\projetACL\projet-acl\labgame\src\main\java\test1\Case.java
+C:\Users\loKaa\projetACL\projet-acl\labgame\src\main\java\module-info.java
+C:\Users\loKaa\projetACL\projet-acl\labgame\src\main\java\test1\main.java
+C:\Users\loKaa\projetACL\projet-acl\labgame\src\main\java\test1\Hero.java
+C:\Users\loKaa\projetACL\projet-acl\labgame\src\main\java\test1\GamePanel.java
+C:\Users\loKaa\projetACL\projet-acl\labgame\src\main\java\test1\Labyrinthe.java
+C:\Users\loKaa\projetACL\projet-acl\labgame\src\main\java\test1\Personnage.java
+>>>>>>> 8e3a97495c427531a4bbfcf29d5266870a1d663f

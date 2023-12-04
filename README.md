@@ -6,7 +6,8 @@ Groupe composé de :
 
 
 ## Suite d'instruction pour lancer le Jeu :
-1. l'utilisateur doit avoir à la fois ***Git*** et ***Maven*** installés sur leurs machines pour cloner le dépôt
+1. l'utilisateur doit avoir à la fois ***Git Bash*** et ***Maven*** installés sur leurs machines pour cloner le dépôt
 2. aller dans le dossier projet-acl/labgame
-3. entrer la ligne de commande suivante : mvn package
-4. si le message affiché comporte *"BUILD SUCCESS"*, alors on peut poursuivre en entrant la ligne de commande suivante : mvn javafx:run
+3. si vous souhaitez lancer une version du code spécifique, effectuer la commande git tag pour sélectionner la version souhaitée : par exemple, pour exécuter la V1 du jeu avant de poursuivre effectuer la commande git checkout V1
+4. entrer la ligne de commande suivante : mvn package
+5. si le message affiché comporte *"BUILD SUCCESS"*, alors on peut poursuivre en entrant la ligne de commande suivante : mvn javafx:run
