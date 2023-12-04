@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Build-Jdk-Spec: 17
+Class-Path: lib/javafx-controls-17.0.6.jar lib/javafx-controls-17.0.6-wi
+ n.jar lib/javafx-media-17.0.6.jar lib/javafx-media-17.0.6-win.jar lib/j
+ avafx-graphics-17.0.6.jar lib/javafx-graphics-17.0.6-win.jar lib/javafx
+ -base-17.0.6.jar lib/javafx-base-17.0.6-win.jar
+Main-Class: test1.main
+Created-By: Maven Integration for Eclipse
+

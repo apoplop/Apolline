@@ -1,21 +1,45 @@
 package test1;
 
 import javafx.scene.input.KeyCode;
+import javafx.scene.control.ProgressBar;
 
 public class Hero extends Personnage {
 	GamePanel panel;
 	private enum direction {UP,DOWN,LEFT,RIGHT};
 	private direction last_dir;
 	private int degatAttaque;
-	
+	private ProgressBar healthBar;
+	private int vie;
+	private int vieMax=100;
+	//private int vieMax;
 
 	public Hero(GamePanel panel, int posi_x, int posi_y) {
+		 
 		super(panel, posi_x, posi_y,10);
 		this.panel = panel;
 		this.vitesse = 1;
 		this.degatAttaque = 1;
+		this.vieMax = vieMax;
+	    this.vie = vieMax; // Initialise la vie du héros à sa valeur maximale
 		this.drawPersonnage("file:src/res/images/heroV2.png");
+		
+		this.healthBar = new ProgressBar(20.0);  // La valeur initiale est 20.0 (100%)
+        this.healthBar.setPrefSize(this.panel.tileSize, 20);  // Ajustez la taille selon vos préférences
+
+        // Ajout de la barre de vie à la scène
+        this.panel.getChildren().add(this.healthBar);
+  	
 	}
+	
+	public void updateHealthBar() {
+	    // Calculer la proportion de la vie actuelle par rapport à la vie maximale
+	    double proportion = (double) vie / vieMax;
+	    this.healthBar.setProgress(proportion);
+	    // Mettre à jour la largeur de l'image pour représenter la jauge de vie
+	    double newWidth = proportion * this.panel.tileSize;
+	    this.imageView.setFitWidth(newWidth);
+	}
+
 	
 	public boolean colisionMonstre() {
 		double a = this.imageView.getX();
