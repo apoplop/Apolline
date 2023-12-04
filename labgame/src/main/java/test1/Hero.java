@@ -12,7 +12,7 @@ public class Hero extends Personnage {
 	public Hero(GamePanel panel, int posi_x, int posi_y) {
 		super(panel, posi_x, posi_y,10);
 		this.panel = panel;
-		this.vitesse = 2;
+		this.vitesse = 1;
 		this.degatAttaque = 1;
 		this.drawPersonnage("file:src/res/images/heroV2.png");
 	}
