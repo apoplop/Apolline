@@ -1,6 +1,7 @@
 Backlog du projet ACL de la team Random.
 Création : 19/10/23
 Dernière modification : 19/10/23
+Mise à jour : 07/12/23
 
 #####-------------------#####
 Backlog des fonctionnalités :
@@ -12,7 +13,7 @@ Backlog des fonctionnalités :
 
 # Liste de fonctionnalités, associées à leurs priorités :
 --JEU--
-1- le joueur peut contrôler le personnage avec les touches du clavier
+FAIT 1- le joueur peut contrôler le personnage avec les touches du clavier
 
 2- il est possible de mettre le jeu sur pause
 2- le joueur dispose d'un temps limité pour gagner
@@ -22,27 +23,27 @@ Backlog des fonctionnalités :
 4- il est possible de gérer la vitesse du joueur
 
 --HEROS--
-1- le personnage se déplace dans un labyrinthe
-1- le personnage ne peut pas traverser les murs
-1- le personnage gagne lorsqu'il trouve le trésor
-1- le personnage a une jauge de vie
-1- le personnage perd de la vie quand il est attaqué par un monstre
+FAIT 1- le personnage se déplace dans un labyrinthe
+BUG 1- le personnage ne peut pas traverser les murs
+FAIT 1- le personnage gagne lorsqu'il trouve le trésor
+FAIT 1- le personnage a une jauge de vie
+FAIT 1- le personnage perd de la vie quand il est attaqué par un monstre
 
 2- le personnage peut attaquer les montres (grâce à une touche définie)
 
-3- le personnage perd de la vie dans les pièges
-3- le personnage gagne de la vie avec les potions
+FAIT 3- le personnage perd de la vie dans les pièges
+FAIT 3- le personnage gagne de la vie avec les potions
 
 
 --MONSTRES--
-1- les monstres se déplacent aléatoirement
-1- le monstre attaque le personnage lorsqu'il rentre à son contact
+EN PARTIE 1- les monstres se déplacent aléatoirement
+FAIT 1- le monstre attaque le personnage lorsqu'il rentre à son contact
 
 2- les monstres ont une jauge de vie
 
 4- lorsque le personnage s'approche, le monstre ne se déplace plus aléatoirement et tente d'attaquer le héros
 
 --LABYRINTHE--
-1- le labyrinthe est carré et constitué de murs
+FAIT 1- le labyrinthe est carré et constitué de murs
 
-3- le labyrinthe a des pièges
+FAIT 3- le labyrinthe a des pièges

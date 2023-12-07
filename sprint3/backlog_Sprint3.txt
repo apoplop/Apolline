@@ -2,16 +2,30 @@ Objectif du Sprint 3 :
 - nouvelle version du jeu
 - mettre à jour le diagramme de séquence
 - mettre à jour le diagramme de classe
+- régler les bugs existants
 
 
 #####-------------------#####
 Tâches à réaliser :
-(3) blabla	
-	3.1- blabla
+(1) diagramme	
+	1.1- diagramme de classe
+	1.2- diagramme de séquence
+(2) implémentation des fonctionalités du héros et des potions/trésor/pièges :
+	2.1- il peut attaquer un monstre et lui faire baisser sa vie en appuyant sur une touche (touche ESPACE)
+	2.2- donner une limite de 3 contact avec le feu avant de faire disparaître le feu pour mettre une image d'herbe à la place
+	2.3- ?
+(3) implémentation des fonctionnalités du jeu :
+	3.1- on peut mettre en pause le jeu en appuyant sur la touche P
+	3.2- ? (mise en place de différent niveaux si vous voulez ?)
+(4) corriger les bugs connus :
+	4.1- corriger les bugs de pixels lors du déplacement du héros
+	4.2- ?
+(5) détecter les bugs inconnus :
+	5.1- développer des test JUnit (?)
 
 
 Répartition :
-Idrissa --> 3.1 + 3.5 + 5.2
+Idrissa --> 
 
 Donatien -->
 
