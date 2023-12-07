@@ -16,8 +16,11 @@ public class Labyrinthe {
 	
 	GamePanel panel;
 	String mapTable[][];
+	@SuppressWarnings("exports")
 	public GridPane grid = new GridPane();
-	ArrayList<Monstre> listeMonstre = new ArrayList();
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public ArrayList<Monstre> listeMonstre = new ArrayList();
+	@SuppressWarnings("rawtypes")
 	ArrayList cordonneeCase = new ArrayList();
 	
 
