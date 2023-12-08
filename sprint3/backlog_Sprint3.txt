@@ -2,7 +2,7 @@ Objectif du Sprint 3 :
 - nouvelle version du jeu
 - mettre à jour le diagramme de séquence
 - mettre à jour le diagramme de classe
-- régler les bugs existants
+- régler les bugs existants (le hero traverse parfois certains murs, le hero se bloque lorsqu'il est trop prêt de certains obstacles)
 
 
 #####-------------------#####
