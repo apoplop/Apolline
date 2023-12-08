@@ -1,11 +1,11 @@
 test1\Hero.class
 test1\Hero$1.class
-test1\Labyrinthe.class
-test1\GamePanel.class
-test1\Monstre$1.class
 module-info.class
 test1\Case.class
+test1\Labyrinthe.class
 test1\Personnage$direction.class
 test1\main.class
+test1\GamePanel.class
+test1\Monstre$1.class
 test1\Monstre.class
 test1\Personnage.class

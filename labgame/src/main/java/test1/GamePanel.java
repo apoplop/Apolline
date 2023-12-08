@@ -47,8 +47,8 @@ public class GamePanel extends Pane {
         pauseText.setTextAlignment(TextAlignment.CENTER);
         
         // Messagfe en cas de défaite, lorsque le héros n'a plus de vie
-        defaiteText = new Text("Défaite ! Le héros est mort.");
-        defaiteText.setStyle("-fx-font-size: 24; -fx-fill: red;");
+        defaiteText = new Text("!!!!!!  Game over !!!!!!");
+        defaiteText.setStyle("-fx-font-size: 24; -fx-fill: white;");
         defaiteText.setVisible(false);
         defaiteText.setTextAlignment(TextAlignment.CENTER);
         this.getChildren().add(defaiteText); // Ajoutez le message de défaite à la scène
