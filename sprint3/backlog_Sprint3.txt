@@ -19,22 +19,22 @@ Tâches à réaliser :
 	3.1- on peut mettre en pause le jeu en appuyant sur la touche P
 	3.2- on peut recommencer le jeu après une défaite
 	3.3- Changer d'animation pour le héros et le monstre (une image pour chaque direction du héro et les monstres)
-	3.4- mise en place de différents niveaux si vous voulez
+	3.4- mise en place de différents niveaux : niveau 1 (carte simple), niveau 2 (carte plus grande avec plus de monstres)
 (4) corriger les bugs connus :
 	4.1- corriger les bugs de pixels lors du déplacement du héros
 (5) détecter les bugs inconnus :
-	5.1- développer des test JUnit (?)
+	5.1- développer des test JUnit
 
 
 Répartition :
-Idrissa --> 2.1+2.4+5.1
+Idrissa --> 2.1 + 2.4 + 5.1
 
-Donatien --> 3.3+2.4+4.1
+Donatien --> 3.3 + 2.4 + 4.1
 
-Mostafa --> 1.1+1.2
+Mostafa --> 1.1 + 1.2
 
-Stanislas --> 3.2+3.1
+Stanislas --> 3.2 + 3.1
 
-Apolline --> 2.2+3.4
+Apolline --> 2.2 + 3.4
 
 
