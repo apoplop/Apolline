@@ -13,8 +13,8 @@ OUI (2) diagramme de classe
 (4) fonctionnalité du labyrinthe
 	OUI 4.1 - le labyrinthe a des pièges qui font (NON) perdre de la vie au personnage
 (5) fonctionnalités des monstres
-	NON 5.1- les monstres se déplacent pseudo-aléatoirement (aléatoire sur une même direction)
-	OUI 5.2- le monstre perd de la vie lorsqu'il est touché par l'attaque du personnage
+	OUI 5.1- les monstres se déplacent pseudo-aléatoirement (aléatoire sur une même direction)
+	NON 5.2- le monstre perd de la vie lorsqu'il est touché par l'attaque du personnage
 	OUI 5.3- le monstre a une jauge de vie (mais on ne voit pas sa jauge)
 
 #####-------------------#####
