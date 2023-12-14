@@ -131,15 +131,13 @@ public class Monstre extends Personnage {
 				double y = m.imageView.getY();
 				double dist = Math.sqrt((a-x)*(a-x)+(b-y)*(b-y));
 				if (dist<=this.panel.tileSize) {
-					System.out.print("colision avec un autre monstre : ");
+					System.out.print("colision monstre - monstre : ");
 					System.out.println(" "+dist);
 			
 					return true;
 			}
 		}
 		}
-	
-
 		return false;
 	}
 }

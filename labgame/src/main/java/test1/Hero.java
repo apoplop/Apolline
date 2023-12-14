@@ -4,6 +4,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.application.Platform;
 import java.util.ArrayList;
 
@@ -16,6 +18,7 @@ public class Hero extends Personnage {
 	private int vie;
 	private int vieMax=100;
 	public int degatAttaqueDistance;
+	private int compteurPotion = 0;
 
 
     public Hero(GamePanel panel, int posi_x, int posi_y, int vieInitiale) {
@@ -73,19 +76,34 @@ public class Hero extends Personnage {
 	  
 	  
 	  //Mécanique d'interaction entre le héro et les objet de la map (trésor, potion, feu)
-	  public boolean detectionVictoire(int x, int y) {
-		if (this.panel.labyrinthe.mapTable[x][y].equals("*")) {
-			return true;
-			}
-		return false;
-	}
+//	  public boolean detectionVictoire(int x, int y) {
+//		if (this.panel.labyrinthe.mapTable[x][y].equals("*")) {
+//			return true;
+//			}
+//		return false;
+//	}
+	  
+	  public boolean detectionVictoire(int pixelX, int pixelY) {
+		    int caseX = pixelX / this.panel.tileSize;
+		    int caseY = pixelY / this.panel.tileSize;
+
+		    // Vérifier si la case correspondante contient une potion
+		    if (this.panel.labyrinthe.mapTable[caseY][caseX].equals("*")) {
+		        return true;
+		    }
+		    return false;
+		}
+	  
+	  
 	  
 	  public boolean detectionPotion(int pixelX, int pixelY) {
 		    int caseX = pixelX / this.panel.tileSize;
 		    int caseY = pixelY / this.panel.tileSize;
 
 		    // Vérifier si la case correspondante contient une potion
-		    if (this.panel.labyrinthe.mapTable[caseY][caseX].equals("4")) {
+		    if (this.panel.labyrinthe.mapTable[caseY][caseX].equals("4")
+		    		||this.panel.labyrinthe.mapTable[caseY][caseX].equals("3")
+		    		||this.panel.labyrinthe.mapTable[caseY][caseX].equals("2")) {
 		        return true;
 		    }
 		    return false;
@@ -118,6 +136,15 @@ public class Hero extends Personnage {
 	
 	                boolean collision = this.panel.collisionMur(upperY, leftX) || this.panel.collisionMur(upperY, rightX);
 	
+	                
+	             // Convertir les coordonnées en pixels en coordonnées de grille
+	                int caseX = (int) this.imageView.getX() / this.panel.tileSize;
+	                int caseY = (int) this.imageView.getY() / this.panel.tileSize;
+	             // Accéder à la case actuelle
+	                Case caseActuelle = this.panel.labyrinthe.getCase(caseX, caseY);
+
+	                
+	                
 	                if (!collision) {
 	                	boolean collisionAvecMonstre = false;
 	                    // Vérification de la collision avec les monstres (inchangé)
@@ -128,30 +155,44 @@ public class Hero extends Personnage {
 	                            break; // Sortie de la boucle si une collision est détectée
 	                        }
 	                    }
+	                    
 	
 	                    // Déplacez le héros si aucune collision avec un monstre
 	                    if (!collisionAvecMonstre || this.last_dir != direction.UP) {
 	                        this.deplacerHaut();
 	                        
-	                        //POTION
-	                        if (this.detectionPotion((int) this.imageView.getX(), (int) this.imageView.getY())) {
-	                            this.gagnerVie(15); // quantiteVieGagnee est la quantité de vie à gagner
-	                            System.out.println("Potion trouvée, vie augmentée");
-	                        }
-	                        
-	                        //FEU
-	                        if (this.detectionFeu((int) this.imageView.getX(), (int) this.imageView.getY())) {
-	                            this.recevoirDegat(5); // degatFeu est la quantité de dégâts causés par le feu
-	                            System.out.println("Piège de feu rencontré, vie réduite");
-	                        }
+		                        //POTION
+		                        if (this.detectionPotion((int) this.imageView.getX(), (int) this.imageView.getY())) {
+		                        	caseActuelle.incrementerCompteurCase();
+		                            System.out.println("compteur" + caseActuelle.getCompteurCase());
+		                        	
+		                        	if (caseActuelle.getCompteurCase() < 3) {
+		                                this.gagnerVie(15);
+			                            System.out.println("Potion trouvée, vie augmentée");
+		                            } else {
+		                                // Remplacer la potion par de l'herbe
+		                                this.panel.labyrinthe.supprimerCase(caseX, caseY);
+			                            System.out.println("case supprimée");
+		                            }
 
-	                        //TRESOR
-	                        if (this.detectionVictoire(this.getPosi_y(), this.getPosi_x())) {
-                                this.panel.labyrinthe.supprimerCase(this.getPosi_y(), this.getPosi_x());
-                                this.panel.isPaused = true;
-                                this.panel.getChildren().add(this.panel.pauseText);
-                                this.panel.updatePauseTextVisibility();
-                            }
+		                        }
+		                        
+		                        //FEU
+		                        if (this.detectionFeu((int) this.imageView.getX(), (int) this.imageView.getY())) {
+		                            this.recevoirDegat(5); // degatFeu est la quantité de dégâts causés par le feu
+		                            System.out.println("Piège de feu rencontré, vie réduite");
+		                        }
+
+		                        //TRESOR
+		                        if (this.detectionVictoire((int) this.imageView.getX(), (int) this.imageView.getY())) {
+	                            	System.out.println("victoire du heros");
+	                                this.panel.isPaused = true;
+	                                this.panel.getChildren().add(this.panel.pauseText);
+	                                this.panel.updatePauseTextVisibility();
+	                            }
+	                        	
+	                        	
+	                        
 	                    }
 	
 	                    this.last_dir = direction.UP;
@@ -166,10 +207,23 @@ public class Hero extends Personnage {
 	                int leftX = (int) this.imageView.getX() + marge; // Bord gauche avec la marge
 	                int rightX = leftX + this.panel.tileSize - marge * 2; // Bord droit avec la marge
 
+	                
+	                
+	                
 	                // Vérifiez si les quatre coins sont libres
 	                boolean collision = this.panel.collisionMur(nextY, leftX) || this.panel.collisionMur(nextY, rightX)
 	                                    || this.panel.collisionMur(nextBottomY, leftX) || this.panel.collisionMur(nextBottomY, rightX);
 
+	                
+	                
+	             // Convertir les coordonnées en pixels en coordonnées de grille
+	                int caseX = (int) this.imageView.getX() / this.panel.tileSize;
+	                int caseY = (int) this.imageView.getY() / this.panel.tileSize;
+	             // Accéder à la case actuelle
+	                Case caseActuelle = this.panel.labyrinthe.getCase(caseX, caseY);
+
+	                
+	                
 	                if (!collision) {
 	                	boolean collisionAvecMonstre = false;
 	                    // Vérification de la collision avec les monstres
@@ -180,29 +234,52 @@ public class Hero extends Personnage {
 	                            break;
 	                        }
 	                    }
+	      
+	                    
 
 	                    if (!collisionAvecMonstre || this.last_dir != direction.DOWN) {
 	                        this.deplacerBas();
-
-	                        //POTION
+ 
+	                      //POTION
 	                        if (this.detectionPotion((int) this.imageView.getX(), (int) this.imageView.getY())) {
-	                            this.gagnerVie(15); // quantiteVieGagnee est la quantité de vie à gagner
-	                            System.out.println("Potion trouvée, vie augmentée");
-	                        }
-	                        //FEU
-	                        if (this.detectionFeu((int) this.imageView.getX(), (int) this.imageView.getY())) {
-	                            this.recevoirDegat(5); // degatFeu est la quantité de dégâts causés par le feu
-	                            System.out.println("Piège de feu rencontré, vie réduite");
+	                        	caseActuelle.incrementerCompteurCase();
+	                            System.out.println("compteur" + caseActuelle.getCompteurCase());
+	                        	
+	                        	if (caseActuelle.getCompteurCase() < 3) {
+	                                this.gagnerVie(15);
+		                            System.out.println("Potion trouvée, vie augmentée");
+	                            } else {
+	                                // Remplacer la potion par de l'herbe
+	                                this.panel.labyrinthe.supprimerCase(caseX, caseY);
+		                            System.out.println("case supprimée");
+	                            }
+
 	                        }
 	                        
-	                        //TRESOR
-                            if (this.detectionVictoire(this.getPosi_y(), this.getPosi_x())) {
-                                this.panel.labyrinthe.supprimerCase(this.getPosi_y(), this.getPosi_x());
-                                this.panel.isPaused = true;
-                                this.panel.getChildren().add(this.panel.pauseText);
-                                this.panel.updatePauseTextVisibility();
-                            }
+//	                        //POTION
+//		                    if (this.detectionPotion((int) this.imageView.getX(), (int) this.imageView.getY())) {
+//		                    	this.gagnerVie(15); // quantiteVieGagnee est la quantité de vie à gagner
+//	                         
+//	                            System.out.println("Potion trouvée, vie augmentée");
+//
+//		                        }
+		                    
+		                    //FEU
+		                    if (this.detectionFeu((int) this.imageView.getX(), (int) this.imageView.getY())) {
+		                    	this.recevoirDegat(5); // degatFeu est la quantité de dégâts causés par le feu
+		                        System.out.println("Piège de feu rencontré, vie réduite");
+		                    }
+		                        
+		                    //TRESOR
+	                        if (this.detectionVictoire((int) this.imageView.getX(), (int) this.imageView.getY())) {
+                            	System.out.println("victoire du heros");
+	                        	this.panel.isPaused = true;
+	                        	this.panel.getChildren().add(this.panel.pauseText);
+	                        	this.panel.updatePauseTextVisibility();
+	                        }
 	                    }
+	                     
+	                    
 
 	                    this.last_dir = direction.DOWN;
 	                }
@@ -218,6 +295,16 @@ public class Hero extends Personnage {
 
 	                boolean collision = this.panel.collisionMur(upperY, leftX) || this.panel.collisionMur(lowerY, leftX);
 
+	                
+	             // Convertir les coordonnées en pixels en coordonnées de grille
+	                int caseX = (int) this.imageView.getX() / this.panel.tileSize;
+	                int caseY = (int) this.imageView.getY() / this.panel.tileSize;
+	             // Accéder à la case actuelle
+	                Case caseActuelle = this.panel.labyrinthe.getCase(caseX, caseY);
+
+	                
+	                
+	                
 	                if (!collision) {
 	                	boolean collisionAvecMonstre = false;
 	                    // Vérification de la collision avec les monstres
@@ -228,14 +315,27 @@ public class Hero extends Personnage {
 	                            break;
 	                        }
 	                    }
+	                    
+	                   
 
 	                    if (!collisionAvecMonstre|| this.last_dir != direction.LEFT) {
 	                        this.deplacerGauche();
-	                        
-	                        //POTION
+
+	                      
+	                      //POTION
 	                        if (this.detectionPotion((int) this.imageView.getX(), (int) this.imageView.getY())) {
-	                            this.gagnerVie(15); // quantiteVieGagnee est la quantité de vie à gagner
-	                            System.out.println("Potion trouvée, vie augmentée");
+	                        	caseActuelle.incrementerCompteurCase();
+	                            System.out.println("compteur" + caseActuelle.getCompteurCase());
+	                        	
+	                        	if (caseActuelle.getCompteurCase() < 3) {
+	                                this.gagnerVie(15);
+		                            System.out.println("Potion trouvée, vie augmentée");
+	                            } else {
+	                                // Remplacer la potion par de l'herbe
+	                                this.panel.labyrinthe.supprimerCase(caseX, caseY);
+		                            System.out.println("case supprimée");
+	                            }
+
 	                        }
 	                        
 	                        //FEU
@@ -245,8 +345,8 @@ public class Hero extends Personnage {
 	                        }
 	                        
 	                        //TRESOR
-                            if (this.detectionVictoire(this.getPosi_y(), this.getPosi_x())) {
-                                this.panel.labyrinthe.supprimerCase(this.getPosi_y(), this.getPosi_x());
+                            if (this.detectionVictoire((int) this.imageView.getX(), (int) this.imageView.getY())) {
+                            	System.out.println("victoire du heros");
                                 this.panel.isPaused = true;
                                 this.panel.getChildren().add(this.panel.pauseText);
                                 this.panel.updatePauseTextVisibility();
@@ -267,6 +367,16 @@ public class Hero extends Personnage {
 
 	                boolean collision = this.panel.collisionMur(upperY, rightX) || this.panel.collisionMur(lowerY, rightX);
 
+	                
+	             // Convertir les coordonnées en pixels en coordonnées de grille
+	                int caseX = (int) this.imageView.getX() / this.panel.tileSize;
+	                int caseY = (int) this.imageView.getY() / this.panel.tileSize;
+	             // Accéder à la case actuelle
+	                Case caseActuelle = this.panel.labyrinthe.getCase(caseX, caseY);
+
+	                
+	                
+	                
 	                if (!collision) {
 	                	boolean collisionAvecMonstre = false;
 	                    // Vérification de la collision avec les monstres
@@ -277,14 +387,27 @@ public class Hero extends Personnage {
 	                            break;
 	                        }
 	                    }
-
+	                    
+	                    
 	                    if (!collisionAvecMonstre || this.last_dir != direction.RIGHT) {
 	                        this.deplacerDroite();
 
-	                        //POTION
+	                        
+	                        
+	                      //POTION
 	                        if (this.detectionPotion((int) this.imageView.getX(), (int) this.imageView.getY())) {
-	                            this.gagnerVie(15); // quantiteVieGagnee est la quantité de vie à gagner
-	                            System.out.println("Potion trouvée, vie augmentée");
+	                        	caseActuelle.incrementerCompteurCase();
+	                            System.out.println("compteur" + caseActuelle.getCompteurCase());
+	                        	
+	                        	if (caseActuelle.getCompteurCase() < 3) {
+	                                this.gagnerVie(15);
+		                            System.out.println("Potion trouvée, vie augmentée");
+	                            } else {
+	                                // Remplacer la potion par de l'herbe
+	                                this.panel.labyrinthe.supprimerCase(caseX, caseY);
+		                            System.out.println("case supprimée");
+	                            }
+
 	                        }
 	                        
 	                        //FEU
@@ -294,8 +417,8 @@ public class Hero extends Personnage {
 	                        }
 	                        
 	                        //TRESOR
-                            if (this.detectionVictoire(this.getPosi_y(), this.getPosi_x())) {
-                                this.panel.labyrinthe.supprimerCase(this.getPosi_y(), this.getPosi_x());
+                            if (this.detectionVictoire((int) this.imageView.getX(), (int) this.imageView.getY())) {
+                            	System.out.println("victoire du heros");
                                 this.panel.isPaused = true;
                                 this.panel.getChildren().add(this.panel.pauseText);
                                 this.panel.updatePauseTextVisibility();

@@ -7,10 +7,11 @@ public class Case {
 	private String typeCase;
 	private Image image;
 	private ImageView imageView;
+    private int compteurCase;
 
 	public Case (String typeCase) {
 		this.typeCase = typeCase;
-		
+			
 		switch(typeCase) {
 		case "0": {
 			this.image = new Image("file:src/res/images/grass.png");
@@ -54,6 +55,9 @@ public class Case {
 		}	
 		}	
 	}
+	
+	
+	
 	public String getTypeCase() {
 		return this.typeCase;
 	}
@@ -68,4 +72,20 @@ public class Case {
 		this.imageView.setFitWidth(pixel_size);
         this.imageView.setFitHeight(pixel_size);
 	}
+	
+	
+	//Incrementer le compteur pour supprimer les potions après 3 utilisations
+    public int getCompteurCase() {
+        return compteurCase;
+    }
+    public void setCompteurCase(int compteurCase) {
+        this.compteurCase = compteurCase;
+    }
+    public void incrementerCompteurCase() {
+        this.compteurCase = this.compteurCase +1;
+    }
+	
+	
+	
+	
 }

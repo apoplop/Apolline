@@ -77,7 +77,7 @@ public class GamePanel extends Pane {
 	}
 
 	
-	public Map<String, Integer> compteursFeu = new HashMap<>();
+	//public Map<String, Integer> compteurPotion = new HashMap<>();
 	
 	
 	//Placement des monstre et du héro
