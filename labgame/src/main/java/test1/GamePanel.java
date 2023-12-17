@@ -1,4 +1,4 @@
- package test1;
+package test1;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,20 +16,31 @@ import javafx.scene.control.ProgressBar;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.geometry.Pos;
+
 
 public class GamePanel extends Pane {
-	//initialisation des param�tres de l'�cran
+	//initialisation des parametres de l'ecran
 	final int originalTileSize=16;  //taille d'une case (16x16 pixels)
-	final int scale =3; 		//�chelle pour avoir un nombre de pixel adapt� a la r�solution de l'�cran
+	final int scale =3; 		//echelle pour avoir un nombre de pixel adapte a la resolution de l'ecran
 	
 	final int tileSize = originalTileSize*scale;
-	final int maxScreenCol = 16;		//taille de l'�cran (16x12 case)
-	final int maxScreenRow = 12;		
-	final int screenWidth = tileSize*maxScreenCol;	//768 pixels de largeur
-	final int screenHeight = tileSize*maxScreenRow;	//576 pixels de hauteur
+	public int maxScreenCol = 25; //taille modifiée par la suite pour s'ajuster a la map chosie	
+	public int maxScreenRow = 25;
 	
-	public Scene scene = null;
+	public int screenWidth = tileSize*maxScreenCol;	//768 pixels de largeur
+	public int screenHeight = tileSize*maxScreenRow;	//576 pixels de hauteur
+	
+	//public Scene scene = null;
+	public Scene scene;
 	public boolean isPaused = false;
+	
 	
 	
 	Labyrinthe labyrinthe;
@@ -39,7 +50,32 @@ public class GamePanel extends Pane {
 	
 	Thread gameThread;
 	
-	public GamePanel() {
+	public GamePanel(String mapName) {
+		VBox layout = new VBox();
+		
+		// Configurez la taille de la scène en fonction de la carte
+	    if (mapName.equals("src/res/maps/map02.txt")) {
+	        this.maxScreenCol = 16;
+	        this.maxScreenRow = 12;
+	        // Recalculez screenWidth et screenHeight
+	        this.screenWidth = tileSize * this.maxScreenCol;
+	        this.screenHeight = tileSize * this.maxScreenRow;
+	    } else if (mapName.equals("src/res/maps/map03.txt")) {
+	        this.maxScreenCol = 21;
+	        this.maxScreenRow = 15;
+	        // Recalculez screenWidth et screenHeight
+	        this.screenWidth = tileSize * this.maxScreenCol;
+	        this.screenHeight = tileSize * this.maxScreenRow;
+	    }
+
+	    labyrinthe = new Labyrinthe(this, mapName);
+	    this.creerMonstre(labyrinthe);
+	    this.scene = new Scene(this, screenWidth, screenHeight);
+		
+		
+		
+		//this.scene = new Scene(layout, screenWidth, screenHeight);
+		
 		//Message en cas de victoire, lorsuqe le héro trouve le trésor
 		pauseText = new Text("Bravo vous avez gagné !!!");
         pauseText.setStyle("-fx-font-size: 24; -fx-fill: white;");
@@ -53,14 +89,8 @@ public class GamePanel extends Pane {
         defaiteText.setTextAlignment(TextAlignment.CENTER);
         this.getChildren().add(defaiteText); // Ajoutez le message de défaite à la scène
         
-        
-        // Initialisaiton du labyrinthe
-		labyrinthe = new Labyrinthe(this, "src/res/maps/map02.txt");
-		this.creerMonstre(labyrinthe);
-		this.scene = new Scene(this,this.screenWidth+1,this.screenHeight+1);
 	}
-	
-	
+
 	//Fonctions pour afficher les messages de victoire ou défaite dans l'interface utilisateur
 	public void updatePauseTextVisibility() {
         // Affiche ou masque le texte en fonction de l'état de la pause

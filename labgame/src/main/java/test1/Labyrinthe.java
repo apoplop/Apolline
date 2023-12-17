@@ -18,9 +18,12 @@ public class Labyrinthe {
 	GamePanel panel;
 	String mapTable[][];
     private Case[][] cases; //stockage des instances de cases
+	@SuppressWarnings("exports")
 	public GridPane grid = new GridPane();
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ArrayList<Monstre> listeMonstre = new ArrayList();
 	
+	@SuppressWarnings("rawtypes")
 	ArrayList cordonneeCase = new ArrayList();
 
 //    public Case getCase(int x, int y) {
@@ -52,7 +55,8 @@ public class Labyrinthe {
 	
 
 
-	 public static String[][] mapLoader (String mapName){
+	 @SuppressWarnings("resource")
+	public static String[][] mapLoader (String mapName){
 	    	int ligne = 0;
 	    	int colonne = 0;
 	    	String mapTable[][] = null;

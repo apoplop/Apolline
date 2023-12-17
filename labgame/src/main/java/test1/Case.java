@@ -61,6 +61,7 @@ public class Case {
 	public String getTypeCase() {
 		return this.typeCase;
 	}
+	@SuppressWarnings("exports")
 	public ImageView getImageView() {
 		return this.imageView;
 	}
