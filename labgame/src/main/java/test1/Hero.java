@@ -25,7 +25,7 @@ public class Hero extends Personnage {
         super(panel, posi_x, posi_y, vieInitiale);
         this.panel = panel;
         this.vitesse = 1;
-        this.degatAttaqueDistance = 50;
+        this.degatAttaqueDistance = 20;
         this.vieMax = vieMax;
         this.vie = vieInitiale; // Initialise la vie du héros à la valeur spécifiée
         
@@ -126,7 +126,20 @@ public class Hero extends Personnage {
 		//System.out.println(this.imageView.getX()+" "+this.imageView.getY());
 		this.panel.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
-            	
+	            case SPACE: {
+	            	boolean collisionAvecMonstre = false;
+	            	 for (Monstre m : this.panel.labyrinthe.listeMonstre) {
+	                        if (this.colisionAvecPersonnage(m)) {
+	                            collisionAvecMonstre = true;
+	                            m.recevoirDegat(degatAttaqueDistance);
+	                            System.out.println("-------------------------------attaque-------------------------------------------------");
+	                            break; // Sortie de la boucle si une collision est détectée
+	                        }
+	                    }
+	            	System.out.println("--------------------------------------------------------------------------------");
+	            	break;
+	            	
+	            }
 	            case UP: {
 	                int marge = this.panel.tileSize / 10;
 	                int nextY = (int) this.imageView.getY() - marge; // Déplacement vers le haut
