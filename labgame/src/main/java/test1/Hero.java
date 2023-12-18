@@ -3,6 +3,7 @@ package test1;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import test1.GamePanel.typeCase;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -101,9 +102,9 @@ public class Hero extends Personnage {
 		    int caseY = pixelY / this.panel.tileSize;
 
 		    // Vérifier si la case correspondante contient une potion
-		    if (this.panel.labyrinthe.mapTable[caseY][caseX].equals("4")
-		    		||this.panel.labyrinthe.mapTable[caseY][caseX].equals("3")
-		    		||this.panel.labyrinthe.mapTable[caseY][caseX].equals("2")) {
+		    if (this.panel.labyrinthe.getCase(caseX, caseY).getTypeCase()==typeCase.POTION_MAGIQUE
+		    		||this.panel.labyrinthe.getCase(caseX, caseY).getTypeCase()==typeCase.POTION_PROTECTION
+		    		||this.panel.labyrinthe.getCase(caseX, caseY).getTypeCase()==typeCase.POTION_VIE) {
 		        return true;
 		    }
 		    return false;
@@ -114,7 +115,7 @@ public class Hero extends Personnage {
 		    int caseY = pixelY / this.panel.tileSize;
 
 		    // Vérifier si la case correspondante contient une potion
-		    if (this.panel.labyrinthe.mapTable[caseY][caseX].equals("5")) {
+		    if (this.panel.labyrinthe.getCase(caseX, caseY).getTypeCase()==typeCase.FEU) {
 		        return true;
 		    }
 		    return false;
@@ -413,7 +414,17 @@ public class Hero extends Personnage {
 	                            System.out.println("compteur" + caseActuelle.getCompteurCase());
 	                        	
 	                        	if (caseActuelle.getCompteurCase() < 3) {
-	                                this.gagnerVie(15);
+	                        		if (caseActuelle.getTypeCase()==typeCase.POTION_MAGIQUE) {
+	                        			this.gagnerVie(50);
+	                        		}
+	                        		if (caseActuelle.getTypeCase()==typeCase.POTION_VIE) {
+	                        			this.gagnerVie(15);
+	                        		}
+	                        		if (caseActuelle.getTypeCase()==typeCase.POTION_PROTECTION) {
+	                        			this.gagnerVie(50);
+	                        		}
+	                                
+	                                
 		                            System.out.println("Potion trouvée, vie augmentée");
 	                            } else {
 	                                // Remplacer la potion par de l'herbe

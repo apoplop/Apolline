@@ -41,10 +41,12 @@ public class GamePanel extends Pane {
 	public Scene scene;
 	public boolean isPaused = false;
 	
+	enum typeCase {MUR,POTION_VIE,POTION_MAGIQUE,FEU,TRESOR,POTION_PROTECTION,TERRE};
+	
 	
 	
 	Labyrinthe labyrinthe;
-	Hero hero;
+ Hero hero;
 	public Text pauseText;
 	public Text defaiteText;
 	
@@ -108,7 +110,6 @@ public class GamePanel extends Pane {
 
 	
 	//public Map<String, Integer> compteurPotion = new HashMap<>();
-	
 	
 	//Placement des monstre et du héro
 	public void creerMonstre(Labyrinthe l) {
