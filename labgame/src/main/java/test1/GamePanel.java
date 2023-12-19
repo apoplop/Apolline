@@ -23,6 +23,9 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 
 
 public class GamePanel extends Pane {
@@ -53,6 +56,15 @@ public class GamePanel extends Pane {
 	public GamePanel(String mapName) {
 		VBox layout = new VBox();
 		
+//		
+	    // Gestion des événements liés à la touche 'P'
+	    this.setOnKeyPressed(e -> {
+	        if (e.getCode() == KeyCode.P) {
+	            System.out.println("Touche P appuyée");
+	            togglePause();
+	        }
+	    });
+		
 		// Configurez la taille de la scène en fonction de la carte
 	    if (mapName.equals("src/res/maps/map02.txt")) {
 	        this.maxScreenCol = 16;
@@ -72,7 +84,7 @@ public class GamePanel extends Pane {
 	    this.creerMonstre(labyrinthe);
 	    this.scene = new Scene(this, screenWidth, screenHeight);
 		
-		
+	 
 		
 		//this.scene = new Scene(layout, screenWidth, screenHeight);
 		
@@ -89,21 +101,78 @@ public class GamePanel extends Pane {
         defaiteText.setTextAlignment(TextAlignment.CENTER);
         this.getChildren().add(defaiteText); // Ajoutez le message de défaite à la scène
         
+        this.scene.getRoot().requestFocus(); // Assurez-vous que la scène a le focus
+		// Démarrage du thread de jeu
+        startGameThread();
+        
 	}
 
+
+	public void togglePause() {
+	    isPaused = !isPaused;
+	    System.out.println("Etat de pause : " + isPaused); // Pour le débogage
+	    updatePauseTextVisibility(); // Mettre à jour la visibilité du texte de pause
+	}
+	
+//	//Fonctions pour afficher les messages de victoire ou défaite dans l'interface utilisateur
+//	public void updatePauseTextVisibility() {
+//        // Affiche ou masque le texte en fonction de l'état de la pause
+//        pauseText.setVisible(isPaused);
+//        // Centre le texte horizontalement et verticalement
+//        pauseText.setLayoutX((screenWidth - pauseText.getBoundsInLocal().getWidth()) / 2);
+//        pauseText.setLayoutY((screenHeight - pauseText.getBoundsInLocal().getHeight()) / 2);
+//    }
+	
 	//Fonctions pour afficher les messages de victoire ou défaite dans l'interface utilisateur
-	public void updatePauseTextVisibility() {
-        // Affiche ou masque le texte en fonction de l'état de la pause
-        pauseText.setVisible(isPaused);
-        // Centre le texte horizontalement et verticalement
-        pauseText.setLayoutX((screenWidth - pauseText.getBoundsInLocal().getWidth()) / 2);
-        pauseText.setLayoutY((screenHeight - pauseText.getBoundsInLocal().getHeight()) / 2);
-    }
+		public void updatePauseTextVisibility() {
+	        
+			Platform.runLater(() -> {
+	            Alert alert = new Alert(AlertType.CONFIRMATION);
+	            alert.setTitle("Victory");
+	            alert.setHeaderText("!!!!!! Vous avez gagné !!!!!!");
+	            alert.setContentText("Voulez-vous quitter ou recommencer?");
+
+	            ButtonType quitterButton = new ButtonType("Quitter");
+	            ButtonType recommencerButton = new ButtonType("Recommencer");
+
+	            alert.getButtonTypes().setAll(quitterButton, recommencerButton);
+
+	            alert.showAndWait().ifPresent(response -> {
+	                if (response == quitterButton) {
+	                    Platform.exit();
+	                    System.exit(0);
+	                } else if (response == recommencerButton) {
+	                	alert.close(); // Ferme l'alerte
+	                    //recommencerJeu(); // Appel de la méthode pour recommencer le jeu
+	                    alert.close(); // Ferme l'alerte
+	                }
+	            });
+	        });
+	    }
+	
 	public void montrerMessageDefaite() {
-	    defaiteText.setLayoutX((screenWidth - defaiteText.getBoundsInLocal().getWidth()) / 2);
-	    defaiteText.setLayoutY((screenHeight - defaiteText.getBoundsInLocal().getHeight()) / 2);
-		defaiteText.setVisible(true);
-		defaiteText.toFront();
+		Platform.runLater(() -> {
+            this.isPaused = true; // Optionnel : mettez le jeu en pause ou terminez le jeu
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Game Over");
+            alert.setHeaderText("!!!!!! Game over !!!!!!");
+            alert.setContentText("Voulez-vous quitter ou recommencer?");
+
+            ButtonType quitterButton = new ButtonType("Quitter");
+            ButtonType recommencerButton = new ButtonType("Recommencer");
+
+            alert.getButtonTypes().setAll(quitterButton, recommencerButton);
+
+            alert.showAndWait().ifPresent(response -> {
+                if (response == quitterButton) {
+                    Platform.exit();
+                    System.exit(0);
+                } else if (response == recommencerButton) {
+                	alert.close(); // Ferme l'alerte
+                	//this.panel.recommencerJeu(); // Appel de la méthode pour recommencer le jeu
+                }
+            });
+        });
 	}
 
 	
@@ -176,47 +245,48 @@ public class GamePanel extends Pane {
 	
 	
 	//Départ du thread game
-	public void startGameThread() {
-	        new Thread(() -> {
+		public void startGameThread() {
+	        gameThread = new Thread(() -> {
 	            while (true) {
-	            	if (!isPaused) {
-	            		update();		//Mets à jour l'état du thread
-	            	}
-	            	this.scene.setOnKeyPressed(e -> {
-	                    if (e.getCode() == KeyCode.P) {
-	                		isPaused = !isPaused;		//Mettre en pause en changant l'état pas pause en pause
-	                        updatePauseTextVisibility();
-	                    }
-	                });
+	                if (!isPaused) {
+	                	//System.out.println("We are here");
+	                    update(); // Update the game state
+	                }
 	                try {
 	                    Thread.sleep(20); // Delay for smoother movement
 	                } catch (InterruptedException e) {
 	                    e.printStackTrace();
 	                }
 	            }
-	        }).start();
-		}
+	        });
+	        gameThread.start();
+	    }
 
 	
 	
-	//Update du thread game
-	public void update() {
-	    Platform.runLater(() -> {
-	    	hero.deplacerHero();
-	    	collisionEntreHeroMonstre();
-	    	hero.updateHealthBar();
-	        ArrayList<Monstre> monstres = new ArrayList();
-	        monstres.addAll(this.labyrinthe.listeMonstre); // Copie manuelle des éléments dans une nouvelle liste
-	        
-	        for (Monstre m : monstres) {
-	            if (this.getChildren().contains(m.imageView)) {
-	                m.deplacerMonstre();
-	            } else {
-	                this.labyrinthe.supprimerMonstre(m);
-	            }
-	        }
-	    });
-	}
+		//Update du thread game
+		public void update() {
+		    if (isPaused) {
+		        // Si le jeu est en pause, ne pas mettre à jour le jeu
+		        return;
+		    }
+
+		    Platform.runLater(() -> {
+		        hero.deplacerHero();
+		        collisionEntreHeroMonstre();
+		        hero.updateHealthBar();
+		        ArrayList<Monstre> monstres = new ArrayList<>(this.labyrinthe.listeMonstre);
+
+		        for (Monstre m : monstres) {
+		            if (this.getChildren().contains(m.imageView)) {
+		                m.deplacerMonstre();
+		            } else {
+		                this.labyrinthe.supprimerMonstre(m);
+		            }
+		        }
+		    });
+		}
+
 
 
 

@@ -24,7 +24,7 @@ public class Hero extends Personnage {
     public Hero(GamePanel panel, int posi_x, int posi_y, int vieInitiale) {
         super(panel, posi_x, posi_y, vieInitiale);
         this.panel = panel;
-        this.vitesse = 1;
+        this.vitesse = 5;
         this.degatAttaqueDistance = 20;
         this.vieMax = vieMax;
         this.vie = vieInitiale; // Initialise la vie du héros à la valeur spécifiée
@@ -68,7 +68,7 @@ public class Hero extends Personnage {
 	        Platform.runLater(() -> {
 	            this.panel.getChildren().remove(this.imageView); // Retire le héro de l'interface
 	            this.panel.isPaused = true; // Optionnel : mettez le jeu en pause ou terminez le jeu
-	            this.panel.montrerMessageDefaite();	            
+	            this.panel.montrerMessageDefaite();
 	        });
 	    }
 	  
@@ -172,7 +172,10 @@ public class Hero extends Personnage {
 	
 	                    // Déplacez le héros si aucune collision avec un monstre
 	                    if (!collisionAvecMonstre || this.last_dir != direction.UP) {
-	                        this.deplacerHaut();
+	                    	if (!this.panel.isPaused) {
+	                    		this.deplacerHaut();
+	                    	}
+	                        
 	                        
 		                        //POTION
 		                        if (this.detectionPotion((int) this.imageView.getX(), (int) this.imageView.getY())) {
@@ -251,7 +254,9 @@ public class Hero extends Personnage {
 	                    
 
 	                    if (!collisionAvecMonstre || this.last_dir != direction.DOWN) {
-	                        this.deplacerBas();
+	                    	if (!this.panel.isPaused) {
+	                    		this.deplacerBas();
+	                    	}
  
 	                      //POTION
 	                        if (this.detectionPotion((int) this.imageView.getX(), (int) this.imageView.getY())) {
@@ -332,7 +337,9 @@ public class Hero extends Personnage {
 	                   
 
 	                    if (!collisionAvecMonstre|| this.last_dir != direction.LEFT) {
-	                        this.deplacerGauche();
+	                    	if (!this.panel.isPaused) {
+	                    		this.deplacerGauche();
+	                    	}
 
 	                      
 	                      //POTION
@@ -403,7 +410,9 @@ public class Hero extends Personnage {
 	                    
 	                    
 	                    if (!collisionAvecMonstre || this.last_dir != direction.RIGHT) {
-	                        this.deplacerDroite();
+	                    	if (!this.panel.isPaused) {
+	                    		this.deplacerDroite();
+	                    	}
 
 	                        
 	                        
