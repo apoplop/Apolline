@@ -24,6 +24,7 @@ public class Labyrinthe {
 	public ArrayList<Monstre> listeMonstre = new ArrayList();
 	Hero hero;
 	
+	
 	@SuppressWarnings("rawtypes")
 	ArrayList cordonneeCase = new ArrayList();
 
@@ -99,78 +100,20 @@ public class Labyrinthe {
 	    }
 	 
 	 public void drawMap (String[][] mapTable) {
-		  for (int i=0; i<mapTable.length;i++) {
-	        	for (int j=0; j<mapTable[i].length;j++) {
-	        		switch(mapTable[i][j]) {
-	        		case "0": {
-	        			CaseTerre c = new CaseTerre();
+			  for (int i=0; i<mapTable.length;i++) {
+		        	for (int j=0; j<mapTable[i].length;j++) {
+		        		Case c = new Case(mapTable[i][j]);
 		                c.setImagePixel(this.panel.tileSize);
 		                c.setPosi(i, j);
 		                this.grid.add(c.getImageView(), j, i);
 		                cases[i][j] = c; // Stockez l'instance de Case dans le tableau (pour le compteur de case)
-	        			break;
-	        		}
-	        		case "1": {
-	        			CaseMur c = new CaseMur();
-		                c.setImagePixel(this.panel.tileSize);
-		                c.setPosi(i, j);
-		                this.grid.add(c.getImageView(), j, i);
-		                cases[i][j] = c; // Stockez l'instance de Case dans le tableau (pour le compteur de case)
-	        			break;
-	        		}
-	        		case "4": {
-	        			CasePotionVie c = new CasePotionVie();
-		                c.setImagePixel(this.panel.tileSize);
-		                c.setPosi(i, j);
-		                this.grid.add(c.getImageView(), j, i);
-		                cases[i][j] = c; // Stockez l'instance de Case dans le tableau (pour le compteur de case)
-	        			break;
-	        		}
-	        		case "2": {
-	        			CasePotionProtection c = new CasePotionProtection();
-		                c.setImagePixel(this.panel.tileSize);
-		                c.setPosi(i, j);
-		                this.grid.add(c.getImageView(), j, i);
-		                cases[i][j] = c; // Stockez l'instance de Case dans le tableau (pour le compteur de case)	        			break;
-	        		}
-	        		case "3": {
-	        			CasePiegeFeu c = new CasePiegeFeu();
-		                c.setImagePixel(this.panel.tileSize);
-		                c.setPosi(i, j);
-		                this.grid.add(c.getImageView(), j, i);
-		                cases[i][j] = c; // Stockez l'instance de Case dans le tableau (pour le compteur de case)
-	        			break;
-	        		}
-	        		case "5": {
-	        			CasePotionMagique c = new CasePotionMagique();
-		                c.setImagePixel(this.panel.tileSize);
-		                c.setPosi(i, j);
-		                this.grid.add(c.getImageView(), j, i);
-		                cases[i][j] = c; // Stockez l'instance de Case dans le tableau (pour le compteur de case)
-	        			break;
-	        		}
-	        		case "*": {
-	        			CaseTresor c = new CaseTresor();
-		                c.setImagePixel(this.panel.tileSize);
-		                c.setPosi(i, j);
-		                this.grid.add(c.getImageView(), j, i);
-		                cases[i][j] = c; // Stockez l'instance de Case dans le tableau (pour le compteur de case)
-	        			break;
-	        		}
-	        		default:{
-	        			CaseTerre c = new CaseTerre();
-		                c.setImagePixel(this.panel.tileSize);
-		                c.setPosi(i, j);
-		                this.grid.add(c.getImageView(), j, i);
-		                cases[i][j] = c; // Stockez l'instance de Case dans le tableau (pour le compteur de case)
-	        			break;
-	        		}	
-	        		}	
-	        		
-	        	}
-	        }
-		   this.panel.getChildren().add(this.grid);
+
+		        	}
+		        }
+			   this.panel.getChildren().add(this.grid);
+	       	
 	 }
+	 
 	 public void ajoutMonstre(Monstre m) {
 		 this.listeMonstre.add(m);
 	 }
@@ -178,9 +121,9 @@ public class Labyrinthe {
 		 this.listeMonstre.remove(m);
 		 this.panel.getChildren().remove(m.imageView);  
 	}
-	public void supprimerCase(int x, int y) {
-		this.mapTable[y][x] = "0";
-		CaseTerre c = new CaseTerre();
+	 public void supprimerCase(int x, int y) {
+			this.mapTable[y][x] = "0";
+			Case c = new Case("0");
 		c.setImagePixel(this.panel.tileSize);
 		 
 		// Parcourir les enfants du GridPane pour trouver la case correspondante

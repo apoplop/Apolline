@@ -101,11 +101,10 @@ public class Hero extends Personnage {
 		    int caseX = pixelX / this.panel.tileSize;
 		    int caseY = pixelY / this.panel.tileSize;
 
-		    // Vérifier si la case correspondante contient une potion
-		    if (this.panel.labyrinthe.getCase(caseX, caseY).getTypeCase()==typeCase.POTION_MAGIQUE
-		    		||this.panel.labyrinthe.getCase(caseX, caseY).getTypeCase()==typeCase.POTION_PROTECTION
-		    		||this.panel.labyrinthe.getCase(caseX, caseY).getTypeCase()==typeCase.POTION_VIE) {
-		        return true;
+		    if (this.panel.labyrinthe.mapTable[caseY][caseX].equals("4")
+		    		||this.panel.labyrinthe.mapTable[caseY][caseX].equals("3")
+		    		||this.panel.labyrinthe.mapTable[caseY][caseX].equals("2")) {
+		    	return true;
 		    }
 		    return false;
 		}
@@ -115,7 +114,7 @@ public class Hero extends Personnage {
 		    int caseY = pixelY / this.panel.tileSize;
 
 		    // Vérifier si la case correspondante contient une potion
-		    if (this.panel.labyrinthe.getCase(caseX, caseY).getTypeCase()==typeCase.FEU) {
+		    if (this.panel.labyrinthe.mapTable[caseY][caseX].equals("5")) {
 		        return true;
 		    }
 		    return false;
@@ -423,15 +422,7 @@ public class Hero extends Personnage {
 	                            System.out.println("compteur" + caseActuelle.getCompteurCase());
 	                        	
 	                        	if (caseActuelle.getCompteurCase() < 3) {
-	                        		if (caseActuelle.getTypeCase()==typeCase.POTION_MAGIQUE) {
-	                        			this.gagnerVie(50);
-	                        		}
-	                        		if (caseActuelle.getTypeCase()==typeCase.POTION_VIE) {
-	                        			this.gagnerVie(15);
-	                        		}
-	                        		if (caseActuelle.getTypeCase()==typeCase.POTION_PROTECTION) {
-	                        			this.gagnerVie(50);
-	                        		}
+	                                this.gagnerVie(15);
 	                                
 	                                
 		                            System.out.println("Potion trouvée, vie augmentée");
