@@ -2,16 +2,19 @@ package test1;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import test1.GamePanel.typeCase;
 
 public class Case {
-	private String typeCase;
-	private Image image;
-	private ImageView imageView;
     private int compteurCase;
 
+    private String typeCase;
+	private Image image;
+	private ImageView imageView;
+	
+	
 	public Case (String typeCase) {
 		this.typeCase = typeCase;
-			
+
 		switch(typeCase) {
 		case "0": {
 			this.image = new Image("file:src/res/images/grass.png");
@@ -53,14 +56,13 @@ public class Case {
 			this.imageView = new ImageView(this.image);
 			break;
 		}	
-		}	
+		}
 	}
-	
-	
-	
 	public String getTypeCase() {
-		return this.typeCase;
-	}
+			return this.typeCase;
+		}
+	
+
 	@SuppressWarnings("exports")
 	public ImageView getImageView() {
 		return this.imageView;

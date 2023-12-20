@@ -22,6 +22,8 @@ public class Labyrinthe {
 	public GridPane grid = new GridPane();
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ArrayList<Monstre> listeMonstre = new ArrayList();
+	Hero hero;
+	
 	
 	@SuppressWarnings("rawtypes")
 	ArrayList cordonneeCase = new ArrayList();
@@ -98,17 +100,20 @@ public class Labyrinthe {
 	    }
 	 
 	 public void drawMap (String[][] mapTable) {
-		  for (int i=0; i<mapTable.length;i++) {
-	        	for (int j=0; j<mapTable[i].length;j++) {
-	        		Case c = new Case(mapTable[i][j]);
-	                c.setImagePixel(this.panel.tileSize);
-	                c.setPosi(i, j);
-	                this.grid.add(c.getImageView(), j, i);
-	                cases[i][j] = c; // Stockez l'instance de Case dans le tableau (pour le compteur de case)
-	        	}
-	        }
-		   this.panel.getChildren().add(this.grid);
+			  for (int i=0; i<mapTable.length;i++) {
+		        	for (int j=0; j<mapTable[i].length;j++) {
+		        		Case c = new Case(mapTable[i][j]);
+		                c.setImagePixel(this.panel.tileSize);
+		                c.setPosi(i, j);
+		                this.grid.add(c.getImageView(), j, i);
+		                cases[i][j] = c; // Stockez l'instance de Case dans le tableau (pour le compteur de case)
+
+		        	}
+		        }
+			   this.panel.getChildren().add(this.grid);
+	       	
 	 }
+	 
 	 public void ajoutMonstre(Monstre m) {
 		 this.listeMonstre.add(m);
 	 }
@@ -116,9 +121,9 @@ public class Labyrinthe {
 		 this.listeMonstre.remove(m);
 		 this.panel.getChildren().remove(m.imageView);  
 	}
-	public void supprimerCase(int x, int y) {
-		this.mapTable[y][x] = "0";
-		Case c = new Case("0");
+	 public void supprimerCase(int x, int y) {
+			this.mapTable[y][x] = "0";
+			Case c = new Case("0");
 		c.setImagePixel(this.panel.tileSize);
 		 
 		// Parcourir les enfants du GridPane pour trouver la case correspondante

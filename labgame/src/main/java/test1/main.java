@@ -27,6 +27,9 @@ public class main extends Application {
             Platform.exit();
             System.exit(0);
         });
+        
+        
+        
     }
     private Scene createWelcomeScene(Stage primaryStage) {
         VBox layout = new VBox(20);

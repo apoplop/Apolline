@@ -34,6 +34,8 @@ public class Personnage {
 	public void setVie(int vie) {
 		if (this.vie + vie < 0) {
 			this.vie = 0;
+		}else if (this.vie + vie > vieMax) {
+			this.vie = 50;
 		}else {
 			this.vie += vie;
 		}

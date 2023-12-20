@@ -3,6 +3,7 @@ package test1;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import test1.GamePanel.typeCase;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,7 +25,7 @@ public class Hero extends Personnage {
     public Hero(GamePanel panel, int posi_x, int posi_y, int vieInitiale) {
         super(panel, posi_x, posi_y, vieInitiale);
         this.panel = panel;
-        this.vitesse = 1;
+        this.vitesse = 5;
         this.degatAttaqueDistance = 20;
         this.vieMax = vieMax;
         this.vie = vieInitiale; // Initialise la vie du héros à la valeur spécifiée
@@ -68,7 +69,7 @@ public class Hero extends Personnage {
 	        Platform.runLater(() -> {
 	            this.panel.getChildren().remove(this.imageView); // Retire le héro de l'interface
 	            this.panel.isPaused = true; // Optionnel : mettez le jeu en pause ou terminez le jeu
-	            this.panel.montrerMessageDefaite();	            
+	            this.panel.montrerMessage("Game Over",0);
 	        });
 	    }
 	  
@@ -100,11 +101,10 @@ public class Hero extends Personnage {
 		    int caseX = pixelX / this.panel.tileSize;
 		    int caseY = pixelY / this.panel.tileSize;
 
-		    // Vérifier si la case correspondante contient une potion
 		    if (this.panel.labyrinthe.mapTable[caseY][caseX].equals("4")
 		    		||this.panel.labyrinthe.mapTable[caseY][caseX].equals("3")
 		    		||this.panel.labyrinthe.mapTable[caseY][caseX].equals("2")) {
-		        return true;
+		    	return true;
 		    }
 		    return false;
 		}
@@ -172,7 +172,10 @@ public class Hero extends Personnage {
 	
 	                    // Déplacez le héros si aucune collision avec un monstre
 	                    if (!collisionAvecMonstre || this.last_dir != direction.UP) {
-	                        this.deplacerHaut();
+	                    	if (!this.panel.isPaused) {
+	                    		this.deplacerHaut();
+	                    	}
+	                        
 	                        
 		                        //POTION
 		                        if (this.detectionPotion((int) this.imageView.getX(), (int) this.imageView.getY())) {
@@ -201,7 +204,8 @@ public class Hero extends Personnage {
 	                            	System.out.println("victoire du heros");
 	                                this.panel.isPaused = true;
 	                                this.panel.getChildren().add(this.panel.pauseText);
-	                                this.panel.updatePauseTextVisibility();
+	                    
+	                                this.panel.montrerMessage("Vous avez gagné",1);
 	                            }
 	                        	
 	                        	
@@ -251,7 +255,9 @@ public class Hero extends Personnage {
 	                    
 
 	                    if (!collisionAvecMonstre || this.last_dir != direction.DOWN) {
-	                        this.deplacerBas();
+	                    	if (!this.panel.isPaused) {
+	                    		this.deplacerBas();
+	                    	}
  
 	                      //POTION
 	                        if (this.detectionPotion((int) this.imageView.getX(), (int) this.imageView.getY())) {
@@ -288,7 +294,7 @@ public class Hero extends Personnage {
                             	System.out.println("victoire du heros");
 	                        	this.panel.isPaused = true;
 	                        	this.panel.getChildren().add(this.panel.pauseText);
-	                        	this.panel.updatePauseTextVisibility();
+	                        	 this.panel.montrerMessage("Vous avez gagné",1);
 	                        }
 	                    }
 	                     
@@ -332,7 +338,9 @@ public class Hero extends Personnage {
 	                   
 
 	                    if (!collisionAvecMonstre|| this.last_dir != direction.LEFT) {
-	                        this.deplacerGauche();
+	                    	if (!this.panel.isPaused) {
+	                    		this.deplacerGauche();
+	                    	}
 
 	                      
 	                      //POTION
@@ -362,7 +370,7 @@ public class Hero extends Personnage {
                             	System.out.println("victoire du heros");
                                 this.panel.isPaused = true;
                                 this.panel.getChildren().add(this.panel.pauseText);
-                                this.panel.updatePauseTextVisibility();
+                                this.panel.montrerMessage("Vous avez gagné",1);
                             }
 	                    }
 
@@ -403,7 +411,9 @@ public class Hero extends Personnage {
 	                    
 	                    
 	                    if (!collisionAvecMonstre || this.last_dir != direction.RIGHT) {
-	                        this.deplacerDroite();
+	                    	if (!this.panel.isPaused) {
+	                    		this.deplacerDroite();
+	                    	}
 
 	                        
 	                        
@@ -414,6 +424,8 @@ public class Hero extends Personnage {
 	                        	
 	                        	if (caseActuelle.getCompteurCase() < 3) {
 	                                this.gagnerVie(15);
+	                                
+	                                
 		                            System.out.println("Potion trouvée, vie augmentée");
 	                            } else {
 	                                // Remplacer la potion par de l'herbe
@@ -434,7 +446,7 @@ public class Hero extends Personnage {
                             	System.out.println("victoire du heros");
                                 this.panel.isPaused = true;
                                 this.panel.getChildren().add(this.panel.pauseText);
-                                this.panel.updatePauseTextVisibility();
+                                this.panel.montrerMessage("Vous avez gagné",1);
                             }
 	                    }
 
