@@ -1,0 +1,30 @@
+Review et Rétrospective du Sprint 3 :
+
+#####-------------------#####
+Tâches réalisées - Sprint Review :
+(1) diagramme	
+	OUI 1.1- diagramme de classe
+	1.2- diagramme de séquence
+(2) implémentation des fonctionalités du héros et des potions/trésor/pièges :
+	OUI 2.1- il peut attaquer un monstre et lui faire baisser sa vie en appuyant sur une touche (touche ESPACE)
+	OUI 2.2- donner une limite de 3 contacts avec chaque potioin avant de les faire disparaître pour mettre une image d'herbe à leur place
+	OUI 2.3- le monstre perd de la vie lorsqu'il est attaqué par le héro
+	OUI 2.4- l'attaque du héro se fait sur le monstre qui se trouve dans la direction où il se déplace (affichage de l'attaque)
+(3) implémentation des fonctionnalités du jeu :
+	OUI 3.1- on peut mettre en pause le jeu en appuyant sur la touche P
+	3.2- on peut recommencer le jeu après une défaite
+	3.3- Changer d'animation pour le héros et le monstre (une image pour chaque direction du héro et les monstres)
+	OUI 3.4- mise en place de différents niveaux : niveau 1 (carte simple), niveau 2 (carte plus grande avec plus de monstres)
+(4) corriger les bugs connus :
+	4.1- corriger les bugs de pixels lors du déplacement du héros
+(5) détecter les bugs inconnus :
+	5.1- développer des test JUnit
+
+
+#####-------------------#####
+Sprint Retrospective
+Ce qui a bien fonctionné :
+- 
+
+Ce qu'il faut améliorer :
+- 
