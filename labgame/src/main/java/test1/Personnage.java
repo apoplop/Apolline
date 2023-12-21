@@ -70,7 +70,7 @@ public class Personnage {
 	}
 	
 	public void deplacerGauche() {
-		int ny = (int) this.imageView.getX() - this.panel.tileSize/10 - vitesse;
+		int ny = (int) this.imageView.getX() - this.panel.originalTileSize/10 - vitesse;
 		this.imageView.setX(ny);
 		this.posi_x = (int) this.imageView.getX()/48;
 	}

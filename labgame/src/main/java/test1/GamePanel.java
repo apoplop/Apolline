@@ -1,9 +1,11 @@
 package test1;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import javafx.application.Platform;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
@@ -19,6 +21,8 @@ import java.util.Map;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -43,26 +47,35 @@ public class GamePanel extends Pane {
 	//public Scene scene = null;
 	public Scene scene;
 	public boolean isPaused = false;
-	
-	enum typeCase {MUR,POTION_VIE,POTION_MAGIQUE,FEU,TRESOR,POTION_PROTECTION,TERRE};
+	private MediaPlayer mediaPlayer;
+	enum typeCase {MUR,POTION_VIE,POTION_MAGIQUE,FEU,TRESOR,POTION_PROTECTION,TERRE,CLE,PORTE};
 	
 	String[] listeMap;
-	
+	String nomJoueur;
 	Labyrinthe labyrinthe;
 	Hero hero;
+	@SuppressWarnings("exports")
+	public GridPane paneInfo = new GridPane();
 	public Text pauseText;
 	public Text defaiteText;
 	
 	Thread gameThread;
 	String mapName;
+	private int niveau;
 	
-	
-	public GamePanel(String mapName) {
-		this.listeMap = new String[2];
-		this.listeMap[0] = "src/res/maps/map02.txt";
-		this.listeMap[1] = "src/res/maps/map03.txt";
-		VBox layout = new VBox();
-		this.mapName = mapName;
+	public GamePanel(String nomJoueur, int niveau) {
+		this.nomJoueur = nomJoueur;
+		this.niveau = niveau;
+		this.startBackgroundMusic();
+		this.listeMap = new String[7];
+		this.listeMap[0] = "src/res/maps/map01.txt";
+		this.listeMap[1] = "src/res/maps/map02.txt";
+		this.listeMap[2] = "src/res/maps/map03.txt";
+		this.listeMap[3] = "src/res/maps/map04.txt";
+		this.listeMap[4] = "src/res/maps/map05.txt";
+		this.listeMap[5] = "src/res/maps/map06.txt";
+		this.listeMap[6] = "src/res/maps/map07.txt";
+		this.mapName = this.listeMap[this.niveau];
 		
 //		
 	    // Gestion des événements liés à la touche 'P'
@@ -72,29 +85,34 @@ public class GamePanel extends Pane {
 	            togglePause();
 	        }
 	    });
-	 // Configurez la taille de la scène en fonction de la carte
-	    if (mapName.equals("src/res/maps/map02.txt")) {
-	        this.maxScreenCol = 16;
-	        this.maxScreenRow = 12;
-	        // Recalculez screenWidth et screenHeight
-	        this.screenWidth = tileSize * this.maxScreenCol;
-	        this.screenHeight = tileSize * this.maxScreenRow;
-	    } else if (mapName.equals("src/res/maps/map03.txt")) {
-	        this.maxScreenCol = 21;
-	        this.maxScreenRow = 15;
-	        // Recalculez screenWidth et screenHeight
-	        this.screenWidth = tileSize * this.maxScreenCol;
-	        this.screenHeight = tileSize * this.maxScreenRow;
-	    }
+        this.maxScreenCol = 21;
+        this.maxScreenRow = 15;
+        // Recalculez screenWidth et screenHeight
+        this.screenWidth = tileSize * this.maxScreenCol;
+        this.screenHeight = tileSize * this.maxScreenRow;
+	   
 	  //this.scene = new Scene(layout, screenWidth, screenHeight);
 	 
 	    this.scene = new Scene(this, screenWidth, screenHeight);
 	 this.demarrerJeu(mapName);
-	 this.scene.getRoot().requestFocus(); // Assurez-vous que la scène a le focus
+	 
+	 this.requestFocus(); // Assurez-vous que la scène a le focus
+	 
 		// Démarrage du thread de jeu
-     startGameThread();
+	 	startGameThread();
 		
 	}
+	public int getNiveau() {
+		return this.niveau;
+	}
+	public void startBackgroundMusic() {
+        String musicFile = "src/res/audio/music1.wav"; // Remplacer par le chemin de votre fichier audio
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Jouer en boucle
+        mediaPlayer.play();
+    }
+	
 	public void demarrerJeu(String map) {
 		
 				this.mapName = map;
@@ -150,33 +168,10 @@ public class GamePanel extends Pane {
 //    }
 	
 	//Fonctions pour afficher les messages de victoire ou défaite dans l'interface utilisateur
-		public void updatePauseTextVisibility() {
-	        
-			Platform.runLater(() -> {
-	            Alert alert = new Alert(AlertType.CONFIRMATION);
-	            alert.setTitle("Victory");
-	            alert.setHeaderText("!!!!!! Vous avez gagné !!!!!!");
-	            alert.setContentText("Voulez-vous quitter ou recommencer?");
 
-	            ButtonType quitterButton = new ButtonType("Quitter");
-	            ButtonType recommencerButton = new ButtonType("Recommencer");
-
-	            alert.getButtonTypes().setAll(quitterButton, recommencerButton);
-
-	            alert.showAndWait().ifPresent(response -> {
-	                if (response == quitterButton) {
-	                    Platform.exit();
-	                    System.exit(0);
-	                } else if (response == recommencerButton) {
-	                	alert.close(); // Ferme l'alerte
-	                    //recommencerJeu(); // Appel de la méthode pour recommencer le jeu
-	                    alert.close(); // Ferme l'alerte
-	                }
-	            });
-	        });
-	    }
 		
 	public void montrerMessage(String message, int codeMessage) {
+		PlayerDataManager manager = new PlayerDataManager();
 		Platform.runLater(() -> {
             this.isPaused = true; // Optionnel : mettez le jeu en pause ou terminez le jeu
             Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -195,26 +190,34 @@ public class GamePanel extends Pane {
                          System.exit(0);
                      } else if (response == recommencerButton) {
                      	alert.close(); // Ferme l'alerte
-                     this.demarrerJeu(this.listeMap[0]);
+                     this.demarrerJeu(this.listeMap[this.niveau]);
                      	//this.recommencerJeu(); // Appel de la méthode pour recommencer le jeu
                      }
                  
                  });
-            }else {
-            	 ButtonType quitterButton = new ButtonType("Quitter");
-                 ButtonType recommencerButton = new ButtonType("Partie suivante");
-                 alert.getButtonTypes().setAll(quitterButton, recommencerButton);
+            }else if(codeMessage == 1) {
+            	this.niveau += 1;
+            	manager.savePlayerData(this.nomJoueur, this.niveau+1); // Enregistrez ou mettez à jour le joueur
+                this.demarrerJeu(this.listeMap[this.niveau]);
+                
+               
+        }else if (codeMessage == 2) {
+        	 ButtonType quitterButton = new ButtonType("Quitter");
+             ButtonType recommencerButton = new ButtonType("Recommencer");
+             alert.getButtonTypes().setAll(quitterButton, recommencerButton);
 
-                 alert.showAndWait().ifPresent(response -> {
-                     if (response == quitterButton) {
-                         Platform.exit();
-                         System.exit(0);
-                     } else if (response == recommencerButton) {
-                     	alert.close(); // Ferme l'alerte
-                     this.demarrerJeu(this.listeMap[1]);
-                     	//this.recommencerJeu(); // Appel de la méthode pour recommencer le jeu
-                     }
-            });
+             alert.showAndWait().ifPresent(response -> {
+                 if (response == quitterButton) {
+                     Platform.exit();
+                     System.exit(0);
+                 } else if (response == recommencerButton) {
+                 	alert.close(); // Ferme l'alerte
+                 	this.niveau = 0;
+                 this.demarrerJeu(this.listeMap[0]);
+                 	//this.recommencerJeu(); // Appel de la méthode pour recommencer le jeu
+                 }
+             
+             });
         }
 	});
 	}
@@ -283,7 +286,7 @@ public class GamePanel extends Pane {
 	public boolean collisionMur(int y, int x) {
 	    int caseX = x / tileSize;
 	    int caseY = y / tileSize;
-	    return labyrinthe.mapTable[caseY][caseX].equals("1"); //return true si la case est un mur
+	    return labyrinthe.getCase(caseX, caseY).getTypeCase() == typeCase.MUR; //return true si la case est un mur
 	}
 	
 	

@@ -45,7 +45,12 @@ public class Labyrinthe {
     public Case getCase(int x, int y) {
         return cases[y][x]; // Retournez l'instance de Case stockée
     }
-    
+    public int getCaseRow() {
+    	return this.cases[0].length;
+    }
+    public int getCaseColumn() {
+    	return this.cases.length;
+    }
 	
 	public Labyrinthe(GamePanel panel, String mapName) {
 		this.panel = panel;
@@ -151,6 +156,22 @@ public class Labyrinthe {
 	        		}
 	        		case "*": {
 	        			CaseTresor c = new CaseTresor();
+		                c.setImagePixel(this.panel.tileSize);
+		                c.setPosi(i, j);
+		                this.grid.add(c.getImageView(), j, i);
+		                cases[i][j] = c; // Stockez l'instance de Case dans le tableau (pour le compteur de case)
+	        			break;
+	        		}
+	        		case "p": {
+	        			CasePorte c = new CasePorte();
+		                c.setImagePixel(this.panel.tileSize);
+		                c.setPosi(i, j);
+		                this.grid.add(c.getImageView(), j, i);
+		                cases[i][j] = c; // Stockez l'instance de Case dans le tableau (pour le compteur de case)
+	        			break;
+	        		}
+	        		case "k": {
+	        			CaseCle c = new CaseCle();
 		                c.setImagePixel(this.panel.tileSize);
 		                c.setPosi(i, j);
 		                this.grid.add(c.getImageView(), j, i);

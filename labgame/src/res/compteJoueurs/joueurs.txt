@@ -1,2 +1,2 @@
-conde,1
-idrissa,1
+conde,3
+idrissa,2

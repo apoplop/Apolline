@@ -4,5 +4,7 @@ module labgame {
 	requires javafx.media;
 	requires javafx.controls;
 	requires javafx.base;
+
+
 	
 }

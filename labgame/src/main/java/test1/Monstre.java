@@ -1,6 +1,7 @@
 package test1;
 
 import javafx.application.Platform;
+import test1.GamePanel.typeCase;
 
 
 public class Monstre extends Personnage {
@@ -45,12 +46,14 @@ public class Monstre extends Personnage {
     }
 	
 	public void deplacerMonstre() {
+		int caseX = (int) this.imageView.getX() / this.panel.tileSize;
+	    int caseY = (int) this.imageView.getY() / this.panel.tileSize;
 	    if (this.panel.getChildren().contains(this.imageView)) {
 	        switch (d) {
 	            case BAS: {
-	                if (this.imageView.getY() < this.panel.screenHeight - this.panel.tileSize && !this.colisionAutreMonstre() 
+	                if (caseY < this.panel.labyrinthe.getCaseColumn()-1 && !this.colisionAutreMonstre() 
 	                        && !this.colisionAvecPersonnage(this.panel.hero)) {
-	                    if (this.panel.labyrinthe.mapTable[this.getPosi_y() + 1][this.getPosi_x()].equals("0")) {
+	                    if (this.panel.labyrinthe.getCase(caseX, caseY+1).getTypeCase() == typeCase.TERRE) {
 	                        this.deplacerBas();
 	                    } else {
 	                        this.d = direction.HAUT;
@@ -65,7 +68,7 @@ public class Monstre extends Personnage {
 	            case HAUT: {
 	                if (this.imageView.getY() > 0 && !this.colisionAutreMonstre()
 	                        && !this.colisionAvecPersonnage(this.panel.hero)) {
-	                    if (this.panel.labyrinthe.mapTable[this.getPosi_y()][this.getPosi_x()].equals("0")) {
+	                    if (this.panel.labyrinthe.getCase(caseX, caseY).getTypeCase() == typeCase.TERRE) {
 	                        this.deplacerHaut();
 	                    } else {
 	                        this.d = direction.BAS;
@@ -80,7 +83,7 @@ public class Monstre extends Personnage {
 	            case GAUCHE: {
 	                if (this.imageView.getX() > 0 && !this.colisionAutreMonstre() 
 	                        && !this.colisionAvecPersonnage(this.panel.hero)) {
-	                    if (this.panel.labyrinthe.mapTable[this.getPosi_y()][this.getPosi_x()].equals("0")) {
+	                    if (this.panel.labyrinthe.getCase(caseX, caseY).getTypeCase() == typeCase.TERRE) {
 	                        this.deplacerGauche();
 	                    } else {
 	                        this.d = direction.DROITE;
@@ -93,9 +96,9 @@ public class Monstre extends Personnage {
 	            }
 	            break;
 	            case DROITE: {
-	                if (this.imageView.getX() < this.panel.screenWidth - this.panel.tileSize && !this.colisionAutreMonstre()
+	                if (caseX < this.panel.labyrinthe.getCaseRow()-1 && !this.colisionAutreMonstre()
 	                        && !this.colisionAvecPersonnage(this.panel.hero)) {
-	                    if (this.panel.labyrinthe.mapTable[this.getPosi_y()][this.getPosi_x() + 1].equals("0")) {
+	                    if (this.panel.labyrinthe.getCase(caseX+1, caseY).getTypeCase() == typeCase.TERRE) {
 	                        this.deplacerDroite();
 	                    } else {
 	                        this.d = direction.GAUCHE;
