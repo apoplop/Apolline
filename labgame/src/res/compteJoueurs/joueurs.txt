@@ -1,2 +1,8 @@
+a,1
+ddjkvqoedj,2
 conde,3
 idrissa,2
+&,1
+az,1
+ere,2
+daz,1

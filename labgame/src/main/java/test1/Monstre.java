@@ -1,7 +1,9 @@
 package test1;
 
 import javafx.application.Platform;
+import javafx.scene.image.Image;
 import test1.GamePanel.typeCase;
+
 
 
 public class Monstre extends Personnage {
@@ -9,6 +11,9 @@ public class Monstre extends Personnage {
 	direction d ;
 	private int degatAttaque; // Dégâts que le monstre peut infliger, valeur à initialiser, peut changer en fonction du niveau choisi par exemple
 	private int vie;
+	private enum marche {Up0,Up1,Down0,Down1,Left0,Left1,Right0,Right1};
+	private marche last_marche;
+	private direction last_dir;
 	
 	public Monstre(GamePanel panel, int posi_x, int posi_y, int vie) {
         super(panel, posi_x, posi_y, vie); //Monstre hérite de vie de la classe Personnage
@@ -63,6 +68,19 @@ public class Monstre extends Personnage {
 	                    this.d = direction.HAUT;
 	                    this.deplacerHaut();
 	                }
+	                if (this.last_dir != direction.BAS || !this.colisionAutreMonstre()) {
+                    	if (!this.panel.isPaused) {
+                    		if(this.last_marche!=marche.Down1) {
+                    			this.imageView.setImage(new Image("file:src/res/imagesV2/monstre/orc_down_1.png"));
+                    			this.last_marche = marche.Down1;
+                    		}else if (this.last_marche != marche.Down0) {
+                    			this.imageView.setImage(new Image("file:src/res/imagesV2/monstre/orc_down_2.png"));
+                    			this.last_marche = marche.Down0;
+                    		}
+                    		
+                    	}
+	                }
+	                
 	            }
 	            break;
 	            case HAUT: {
@@ -77,6 +95,18 @@ public class Monstre extends Personnage {
 	                } else {
 	                    this.d = direction.BAS;
 	                    this.deplacerBas();
+	                }
+	                if (this.last_dir != direction.HAUT || !this.colisionAutreMonstre()) {
+                    	if (!this.panel.isPaused) {
+                    		if(this.last_marche!=marche.Up1) {
+                    			this.imageView.setImage(new Image("file:src/res/imagesV2/monstre/orc_down_1.png"));
+                    			this.last_marche = marche.Up1;
+                    		}else if (this.last_marche != marche.Up0) {
+                    			this.imageView.setImage(new Image("file:src/res/imagesV2/monstre/orc_down_2.png"));
+                    			this.last_marche = marche.Up0;
+                    		}
+                    		
+                    	}
 	                }
 	            }
 	            break;
@@ -93,6 +123,18 @@ public class Monstre extends Personnage {
 	                    this.d = direction.DROITE;
 	                    this.deplacerDroite();
 	                }
+	                if (this.last_dir != direction.GAUCHE || !this.colisionAutreMonstre()) {
+                    	if (!this.panel.isPaused) {
+                    		if(this.last_marche!=marche.Left1) {
+                    			this.imageView.setImage(new Image("file:src/res/imagesV2/monstre/skeletonlord_left_1.png"));
+                    			this.last_marche = marche.Left1;
+                    		}else if (this.last_marche != marche.Left0) {
+                    			this.imageView.setImage(new Image("file:src/res/imagesV2/monstre/skeletonlord_left_2.png"));
+                    			this.last_marche = marche.Left0;
+                    		}
+                    		
+                    	}
+	                }
 	            }
 	            break;
 	            case DROITE: {
@@ -107,6 +149,18 @@ public class Monstre extends Personnage {
 	                } else {
 	                    this.d = direction.GAUCHE;
 	                    this.deplacerGauche();
+	                }
+	                if (this.last_dir != direction.DROITE || !this.colisionAutreMonstre()) {
+                    	if (!this.panel.isPaused) {
+                    		if(this.last_marche!=marche.Right1) {
+                    			this.imageView.setImage(new Image("file:src/res/imagesV2/monstre/skeletonlord_right_1.png"));
+                    			this.last_marche = marche.Right1;
+                    		}else if (this.last_marche != marche.Right0) {
+                    			this.imageView.setImage(new Image("file:src/res/imagesV2/monstre/skeletonlord_right_2.png"));
+                    			this.last_marche = marche.Right0;
+                    		}
+                    		
+                    	}
 	                }
 	            }
 	            break;
