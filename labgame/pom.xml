@@ -29,13 +29,13 @@
             <artifactId>javafx-graphics</artifactId>
             <version>17.0.6</version> <!-- Use the version that matches your JavaFX SDK -->
         </dependency>
-        <!-- Add other dependencies as needed -->
-        <dependency>
-		    <groupId>org.junit.jupiter</groupId>
-		    <artifactId>junit-jupiter-api</artifactId>
-		    <version>5.7.0</version>
-		    <scope>test</scope>
-		</dependency>
+        <!-- Dépendance JUnit 4 -->
+	    <dependency>
+	        <groupId>junit</groupId>
+	        <artifactId>junit</artifactId>
+	        <version>4.13.2</version> <!-- ou la version la plus récente de JUnit 4 -->
+	        <scope>test</scope>
+	    </dependency>
 
     </dependencies>
 
