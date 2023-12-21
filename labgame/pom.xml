@@ -30,6 +30,13 @@
             <version>17.0.6</version> <!-- Use the version that matches your JavaFX SDK -->
         </dependency>
         <!-- Add other dependencies as needed -->
+        <dependency>
+		    <groupId>org.junit.jupiter</groupId>
+		    <artifactId>junit-jupiter-api</artifactId>
+		    <version>5.7.0</version>
+		    <scope>test</scope>
+		</dependency>
+
     </dependencies>
 
     <build>
