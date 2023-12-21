@@ -12,11 +12,11 @@ Tâches réalisées - Sprint Review :
 	OUI 2.4- l'attaque du héro se fait sur le monstre qui se trouve dans la direction où il se déplace (affichage de l'attaque)
 (3) implémentation des fonctionnalités du jeu :
 	OUI 3.1- on peut mettre en pause le jeu en appuyant sur la touche P
-	3.2- on peut recommencer le jeu après une défaite
-	3.3- Changer d'animation pour le héros et le monstre (une image pour chaque direction du héro et les monstres)
+	OUI 3.2- on peut recommencer le jeu après une défaite
+	OUI 3.3- Changer d'animation pour le héros et le monstre (une image pour chaque direction du héro et les monstres)
 	OUI 3.4- mise en place de différents niveaux : niveau 1 (carte simple), niveau 2 (carte plus grande avec plus de monstres)
 (4) corriger les bugs connus :
-	4.1- corriger les bugs de pixels lors du déplacement du héros
+	OUI 4.1- corriger les bugs de pixels lors du déplacement du héros
 (5) détecter les bugs inconnus :
 	5.1- développer des test JUnit
 
@@ -24,7 +24,7 @@ Tâches réalisées - Sprint Review :
 #####-------------------#####
 Sprint Retrospective
 Ce qui a bien fonctionné :
-- 
+- la plupart des tâches ont été réalisée
 
 Ce qu'il faut améliorer :
 - 
