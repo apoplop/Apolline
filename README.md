@@ -6,14 +6,15 @@ Groupe composé de :
 * Nom d'équipe : *Team Random*
 
 ## But du jeu
-Le héros se déplace dans un labyrinthe et doit trouver une clef pour accéder à une porte qui mène au prochain niveau. Le héro répète ceci jusqu'à trouver la clef du coffre-trésor, sur son chemin, il doit éviter les monstres qui lui feront perdre de la vie ainsi que les flammes sur son chemin. Pour régénérer, le héro peut prendre des potions de vie qui augmenteront sa barre de vie.
-Le héros va traverser une série de salles en trouvant la clef et en ouvrant la porte, jusqu'à la dernière salle où il devra récupérer le coffre-trésor qui annonce la victoire.
+- Le héros se déplace dans un labyrinthe et doit trouver une clef pour accéder à une porte qui mène au prochain niveau. Le héro répète ceci jusqu'à trouver la clef du coffre-trésor, sur son chemin, il doit éviter les monstres qui lui feront perdre de la vie ainsi que les flammes sur son chemin.
+- - Pour régénérer, le héro peut prendre des potions de vie qui augmenteront sa barre de vie.
+- Le héros va traverser une série de salles en trouvant la clef et en ouvrant la porte. Lorsqu'il arrive à la dernière salle, il doit récupérer le coffre-trésor qui annonce la victoire.
 
 ### Touches et mécaniques
-Pour se déplacer, l'utilisateur doit appuyer sur les touches "Haut", "Bas", "Gauche" et "Droite" de son clavier.
-Pour attaquer, l'utilisateur doit appuyer sur la touche "ESPACE".
-Pour mettre le jeu sur Pause, l'utilisateur doit appuyer sur la touche "P".
-Pour récupérer les potions, l'utilisateur doit passer sur une case potion, idem pour la clef, les portes et le trésor final.
+- Pour se déplacer, l'utilisateur doit appuyer sur les touches "Haut", "Bas", "Gauche" et "Droite" de son clavier.
+- Pour attaquer, l'utilisateur doit appuyer sur la touche "ESPACE".
+- Pour mettre le jeu sur Pause, l'utilisateur doit appuyer sur la touche "P".
+- Pour récupérer les potions, l'utilisateur doit passer sur une case potion, idem pour la clef, les portes et le trésor final.
 
 ## Organisation du dépôt
 ### Dossiers et fichiers disponibles
